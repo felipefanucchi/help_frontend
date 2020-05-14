@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -9,11 +9,11 @@ export class AuthGuard implements CanActivate {
         private router: Router
     ) {}
 
-    canActivate(route: ActivatedRouteSnapshot): void {
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         const currentUser = 'admin';
 
-        if (currentUser) this.handleLoggedUser(route, currentUser);
-        else this.handleNOTLoggedUser();
+        if (currentUser) return this.handleLoggedUser(route, currentUser);
+        else return this.handleNOTLoggedUser();
     }
 
     private handleLoggedUser(route, currentUser): boolean {
