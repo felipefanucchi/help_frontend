@@ -14,8 +14,10 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         const currentUser = this.authenticationService.currentUserValue;
 
+        console.log(currentUser);
+
         if (currentUser) return this.handleLoggedUser(route, currentUser);
-        else return this.handleNOTLoggedUser();
+        else return this.handleNOTLoggedUser(state);
     }
 
     private handleLoggedUser(route, currentUser): boolean {
@@ -28,8 +30,13 @@ export class AuthGuard implements CanActivate {
         return true;
     }
 
-    private handleNOTLoggedUser() {
-        this.router.navigate(['login']);
+    private handleNOTLoggedUser(state: RouterStateSnapshot) {
+        // Added this params, so after the login the user must get redirected to this url.
+        this.router.navigate(['auth'], {
+            queryParams: {
+                returnUrl: state.url
+            }
+        });
         return false;
     }
 }
