@@ -44,4 +44,6 @@ export class AuthenticationService {
 
         return user;
     }
+
+    // Must implement the recover and register method.
 }
