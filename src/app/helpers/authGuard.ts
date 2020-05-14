@@ -1,0 +1,33 @@
+import { Injectable } from "@angular/core";
+import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
+
+@Injectable({
+    providedIn: 'root'
+})
+export class AuthGuard implements CanActivate {
+    constructor(
+        private router: Router
+    ) {}
+
+    canActivate(route: ActivatedRouteSnapshot): void {
+        const currentUser = 'admin';
+
+        if (currentUser) this.handleLoggedUser(route, currentUser);
+        else this.handleNOTLoggedUser();
+    }
+
+    private handleLoggedUser(route, currentUser): boolean {
+        // check if the user has permission
+        if (route.data.roles && route.data.roles.indexOf(currentUser) === -1) {
+            this.router.navigate(['/']);
+            return false
+        }
+
+        return true;
+    }
+
+    private handleNOTLoggedUser() {
+        this.router.navigate(['login']);
+        return false;
+    }
+}
