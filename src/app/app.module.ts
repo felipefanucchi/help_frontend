@@ -20,7 +20,7 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
-import { ErrorInterceptor } from './helpers';
+import { ErrorInterceptor, TokenInterceptor } from './helpers';
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,7 +42,8 @@ import { ErrorInterceptor } from './helpers';
     ThemeModule.forRoot(),
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true, useValue: undefined }
   ],
   bootstrap: [AppComponent],
 })

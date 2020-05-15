@@ -10,7 +10,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     fordiddenStatuscode = [401, 403];
 
     constructor(
-        private authenticationService: AuthenticationService,
+        private authenticationService: AuthenticationService<any>,
         private router: Router
     ) {}
 
@@ -19,6 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     }
 
     private handleErrors(err: HttpErrorResponse): Observable<HttpEvent<any>> {
+        // check if the route is forbidden
         if (this.fordiddenStatuscode.indexOf(err.status) !== -1) {
             this.authenticationService.logout();
             this.router.navigateByUrl('/', {

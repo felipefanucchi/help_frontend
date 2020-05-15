@@ -8,12 +8,12 @@ import { map } from 'rxjs/operators';
 @Injectable({
     providedIn: 'root'
 })
-export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
+export class AuthenticationService<T> {
+    private currentUserSubject: BehaviorSubject<T>;
+    public currentUser: Observable<T>;
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(
+        this.currentUserSubject = new BehaviorSubject<T>(
             JSON.parse(localStorage.getItem('currentUser'))
         );
 
@@ -36,7 +36,7 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
     }
 
-    private handleLogin(user) {
+    private handleLogin<T>(user): T {
         if (user && user.token) {
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
