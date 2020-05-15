@@ -1,3 +1,5 @@
+import { Role } from './roles';
+
 export class User {
     name: string;
     email: string;
@@ -10,4 +12,5 @@ export class User {
     city: string;
     state: string;
     token?: string;
+    role: Role;
 }
