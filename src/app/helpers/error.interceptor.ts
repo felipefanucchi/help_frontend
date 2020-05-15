@@ -10,7 +10,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     fordiddenStatuscode = [401, 403];
 
     constructor(
-        private authenticationService: AuthenticationService<any>,
+        private authenticationService: AuthenticationService,
         private router: Router
     ) {}
 

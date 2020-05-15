@@ -6,15 +6,14 @@ import { AuthenticationService } from '../services';
     providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
+
     constructor(
         private router: Router,
-        private authenticationService: AuthenticationService<any>
+        private authenticationService: AuthenticationService
     ) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         const currentUser = this.authenticationService.currentUserValue;
-
-        console.log(currentUser);
 
         if (currentUser) return this.handleLoggedUser(route, currentUser);
         else return this.handleNOTLoggedUser(state);

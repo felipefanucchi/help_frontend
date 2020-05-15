@@ -1,19 +1,19 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from '../@core/data/users';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
+import { User } from '../models/User';
 
 @Injectable({
     providedIn: 'root'
 })
-export class AuthenticationService<T> {
-    private currentUserSubject: BehaviorSubject<T>;
-    public currentUser: Observable<T>;
+export class AuthenticationService {
+    private currentUserSubject: BehaviorSubject<User>;
+    public currentUser: Observable<User>;
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<T>(
+        this.currentUserSubject = new BehaviorSubject<User>(
             JSON.parse(localStorage.getItem('currentUser'))
         );
 
@@ -36,7 +36,7 @@ export class AuthenticationService<T> {
         this.currentUserSubject.next(null);
     }
 
-    private handleLogin<T>(user): T {
+    private handleLogin(user: User): User {
         if (user && user.token) {
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
