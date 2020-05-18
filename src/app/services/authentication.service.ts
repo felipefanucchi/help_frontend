@@ -4,6 +4,9 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { User } from '../models/User';
+import { HandleUserType } from '../helpers';
+// @ts-ignore: Unreachable code error
+import * as FakeUser from '../fakeuser.json';
 
 @Injectable({
     providedIn: 'root'
@@ -24,11 +27,15 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string): Observable<any> {
-        return this.http.post(`${environment.api}`, {
-            username,
-            password
-        }).pipe(map(this.handleLogin))
+    login(username: string, password: string): Observable<any> | void {
+        const HandleUser = new HandleUserType(FakeUser.default.user);
+        const currentUser = HandleUser.create();
+        this.handleLogin(currentUser);
+
+        // return this.http.post(`${environment.api}`, {
+        //     username,
+        //     password
+        // }).pipe(map(this.handleLogin))
     }
 
     logout(): void {
@@ -37,7 +44,7 @@ export class AuthenticationService {
     }
 
     private handleLogin(user: User): User {
-        if (user && user.token) {
+        if (user.token) {
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
         }

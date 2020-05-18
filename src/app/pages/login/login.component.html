@@ -1,0 +1,26 @@
+<h1>Login</h1>
+<form class="form" [formGroup]="form" *ngIf="form" (submit)="handleSubmit($event)">
+    <div class="form-control-group">
+        <label class="label">E-mail</label>
+        <input
+            formControlName="username"
+            nbInput
+            fullWidth
+            pattern=".+@.+\..+"
+        />
+    </div>
+    <div class="form-control-group">
+        <label class="label">Senha</label>
+        <input 
+            formControlName="password" 
+            nbInput 
+            fullWidth 
+            type="password"
+            fieldSize="large"
+            autofocus
+        />
+    </div>
+    <div class="form-control-group">
+        <button nbButton fullWidth size="large">Entrar</button>
+    </div>
+</form>

@@ -1,0 +1,21 @@
+{
+    "user": {
+        "name": "Felipe",
+        "email": "flfanucchi@gmail.com",
+        "password": "123",
+        "document_number": "538329907",
+        "birthdate": "03-10-1997",
+        "postal_code": "07020201",
+        "address": "Rua Nadir",
+        "neighborhood": "Gopouva",
+        "city": "Guarulhos",
+        "state": "São Paulo",
+        "token": "TOKEN",
+        "role": "Professional",
+        "register_code": "5588843",
+        "latitude": "5.554522",
+        "longitude": "5.655512",
+        "cost": "80",
+        "service": "ocupacional_therapy"
+    }
+}

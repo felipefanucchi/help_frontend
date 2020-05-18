@@ -10,6 +10,7 @@ import {
 } from '@nebular/auth';
 import { AuthGuard } from './helpers';
 import { Role } from './models';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   {
@@ -25,7 +26,7 @@ export const routes: Routes = [
     children: [
       {
         path: '',
-        component: NbLoginComponent,
+        component: LoginComponent,
       },
       {
         path: 'login',

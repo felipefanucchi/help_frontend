@@ -13,4 +13,8 @@ export class User {
     state: string;
     token?: string;
     role: Role;
+
+    constructor(protected user: User) {
+        Object.assign(this, user);
+    }
 }

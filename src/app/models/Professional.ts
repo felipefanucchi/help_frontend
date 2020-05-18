@@ -7,5 +7,8 @@ export class Professional extends User {
     longitude: string;
     cost: string;
     service: ProfessionalServices
-}
 
+    constructor(protected user: any) {
+        super(user);
+    }
+}
