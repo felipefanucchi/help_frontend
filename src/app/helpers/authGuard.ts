@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
 import { AuthenticationService } from '../services';
+import { User } from '../models/User';
 @Injectable({
     providedIn: 'root'
 })
@@ -14,13 +15,16 @@ export class AuthGuard implements CanActivate {
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let currentUser = this.authenticationService.currentUserValue;
 
+        console.log(currentUser, 'canActivate currentuser');
+ 
         if (currentUser) return this.handleLoggedUser(route, currentUser);
         else return this.handleNOTLoggedUser(state);
     }
 
-    private handleLoggedUser(route, currentUser): boolean {
+    private handleLoggedUser(route, currentUser: User): boolean {
         // check if the user has permission
-        if (route.data.roles && route.data.roles.indexOf(currentUser) === -1) {
+        if (route.data.roles && route.data.roles.indexOf(currentUser.role) === -1) {
+            console.log(route.data.roles, ' Role Permissions');
             this.router.navigate(['/']);
             return false
         }

@@ -12,8 +12,8 @@ export class LoginComponent extends NbLoginComponent {
   form: FormGroup;
 
   constructor(
-    private authenticationService: AuthenticationService,
-    protected router: Router
+    protected router: Router,
+    private authenticationService: AuthenticationService
   ) {
     super(null, null, null, null);
   }
@@ -21,7 +21,7 @@ export class LoginComponent extends NbLoginComponent {
   ngOnInit(): void {
     this.authenticationService.currentUser.subscribe(user => {
       console.log(user);
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/pages']);
     });
 
     this.form = new FormGroup({

@@ -14,9 +14,7 @@ const routes: Routes = [{
   children: [
     {
       path: 'dashboard',
-      component: ECommerceComponent,
-      canActivate: [AuthGuard],
-      data: { roles: Role.Professional }
+      component: ECommerceComponent
     },
     {
       path: 'iot-dashboard',
