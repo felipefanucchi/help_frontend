@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
         console.log(currentUser.role, ' current user role');
         // check if the user has permission
         if (route.data.roles && route.data.roles.indexOf(currentUser.role) === -1) {
-            this.router.navigate(['/']);
+            this.router.navigate(['/auth']);
             return false
         }
 
