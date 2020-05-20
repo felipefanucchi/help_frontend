@@ -27,15 +27,13 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username: string, password: string): Observable<any> | void {
-        const HandleUser = new HandleUserType(FakeUser.default.user);
-        const currentUser = HandleUser.create();
-        this.handleLogin(currentUser);
-
-        // return this.http.post(`${environment.api}`, {
-        //     username,
-        //     password
-        // }).pipe(map(this.handleLogin))
+    login(email: string, password: string): Observable<any> {
+        // const HandleUser = new HandleUserType(FakeUser.default.user);
+        // const currentUser = HandleUser.create();
+        return this.http.post(`${environment.api}accounts/login/`, {
+            email,
+            password
+        }).pipe(map(this.handleLogin.bind(this)));
     }
 
     logout(): void {

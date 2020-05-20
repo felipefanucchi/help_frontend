@@ -3,6 +3,7 @@ import { NbLoginComponent, NbAuthService } from '@nebular/auth';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthenticationService } from '../../services';
 import { Router } from '@angular/router';
+import { User } from '../../models/User';
 
 @Component({
   selector: 'app-login',
@@ -19,20 +20,28 @@ export class LoginComponent extends NbLoginComponent {
   }
 
   ngOnInit(): void {
-    this.authenticationService.currentUser.subscribe(user => {
-      console.log(user);
-      this.router.navigate(['/pages']);
-    });
+    this.authenticationService.currentUser.subscribe((user: User) => this.redirectUser(user));
 
     this.form = new FormGroup({
-      username: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    const {username, password} = this.form.getRawValue();
-    this.authenticationService.login(username, password);
+    const {email, password} = this.form.getRawValue();
+    console.log(email, password);
+    this.authenticationService.login(email, password)
+      .subscribe(
+        (user: User) => this.redirectUser(user),
+        err => console.log(err)
+      );
+  }
+
+  private redirectUser(user: User): void {
+    // Based on role, you can choose where the user goes.
+    console.log(user);
+    this.router.navigate(['/pages']);
   }
 }
