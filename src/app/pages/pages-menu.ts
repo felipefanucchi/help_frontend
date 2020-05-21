@@ -1,6 +1,6 @@
 import { NbMenuItem } from '@nebular/theme';
 
-export const MENU_ITEMS: NbMenuItem[] = [
+[
   {
     title: 'E-commerce',
     icon: 'shopping-cart-outline',
@@ -243,5 +243,14 @@ export const MENU_ITEMS: NbMenuItem[] = [
         link: '/auth/reset-password',
       },
     ],
+  },
+];
+
+// Overwriting the menus .
+export const MENU_ITEMS: NbMenuItem[] = [
+  {
+    title: 'Profissionais',
+    icon: 'briefcase-outline',
+    link: '/contas/profissionais',
   },
 ];
