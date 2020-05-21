@@ -21,6 +21,15 @@ export const routes: Routes = [
     data: { roles: Role.Professional }
   },
   {
+    path: 'teste',
+    loadChildren: () => import('./help-pages/help-pages.module')
+      .then(m => m.HelpPagesModule),
+    canActivate: [AuthGuard],
+    data: {
+      roles: [Role.Admin, Role.Help]
+    }
+  },
+  {
     path: 'auth',
     component: NbAuthComponent,
     children: [
