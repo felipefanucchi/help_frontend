@@ -17,16 +17,14 @@ export const routes: Routes = [
     path: 'pages',
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
-    canActivate: [AuthGuard],
-    data: { roles: Role.Professional }
   },
   {
-    path: 'teste',
-    loadChildren: () => import('./help-pages/help-pages.module')
-      .then(m => m.HelpPagesModule),
+    path: 'dashboard',
+    loadChildren: () => import('./help/help.module')
+      .then(m => m.HelpModule),
     canActivate: [AuthGuard],
     data: {
-      roles: [Role.Admin, Role.Help]
+      roles: [Role.Admin, Role.Help, Role.Professional, Role.Customer]
     }
   },
   {

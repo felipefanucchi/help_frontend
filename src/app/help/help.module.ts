@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { NbMenuModule } from '@nebular/theme';
-import { HelpPagesComponent } from './help-pages.component';
+import { HelpMainComponent } from './help.component';
 import { ThemeModule } from '../@theme/theme.module';
-import { HelpPagesRoutingModule } from './help-pages-routing.module';
+import { HelpRoutingModule } from './help-routing.module';
 
 
 @NgModule({
   imports: [
-    HelpPagesRoutingModule,
+    HelpRoutingModule,
     ThemeModule,
     NbMenuModule,
   ],
   declarations: [
-    HelpPagesComponent,
+    HelpMainComponent,
   ],
 })
-export class HelpPagesModule {
+export class HelpModule {
 }
