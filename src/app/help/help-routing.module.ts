@@ -11,8 +11,17 @@ const routes: Routes = [{
   component: HelpMainComponent,
   children: [
     {
+      path: 'admin',
+      loadChildren: () => import('./admin/admin.module')
+        .then(m => m.AdminModule),
+      canActivate: [AuthGuard],
+      data: {
+        roles: [Role.Admin]
+      }
+    },
+    {
       path: '',
-      redirectTo: 'home',
+      redirectTo: '',
       pathMatch: 'full',
     },
     {

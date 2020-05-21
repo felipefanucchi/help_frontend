@@ -1,5 +1,7 @@
 import { NbMenuItem } from '@nebular/theme';
 
+const basePath = '/dashboard/admin';
+
 export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     {
       title: 'Posições',
@@ -8,21 +10,30 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     {
       title: 'Profissionais',
       icon: 'briefcase-outline',
-      link: '/lista/profissionais',
+      children: [
+        {
+          title: 'Adicionar novo',
+          link: `${basePath}/adicionar/profissional`
+        },
+        {
+          title: 'Ver todos',
+          link: `${basePath}/lista/profissional'`
+        }
+      ]
     },
     {
       title: 'Administradores',
       icon: 'person-outline',
-      link: '/lista/administradores',
+      link: `${basePath}/lista/admnistrador'`
     },
     {
       title: 'Equipe Help',
       icon: 'plus-square-outline',
-      link: '/lista/equipe-help',
+      link: `${basePath}/lista/equipe-help'`
     },
     {
       title: 'Contratantes',
       icon: 'people-outline',
-      link: '/lista/contratantes',
+      link: `${basePath}/lista/contratante'`
     },
   ];

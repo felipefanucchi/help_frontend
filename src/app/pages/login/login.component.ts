@@ -42,6 +42,6 @@ export class LoginComponent extends NbLoginComponent {
   private redirectUser(user: User): void {
     // Based on role, you can choose where the user goes.
     console.log(user);
-    this.router.navigate(['/pages']);
+    this.router.navigate(['/dashboard']);
   }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ADMIN_MENU_ITEMS } from './admin/admin-menu';
+import { PROFESSIONAL_MENU_ITEMS } from './professional/professional-menu';
 import { AuthenticationService } from '../services';
 import { NbMenuItem } from '@nebular/theme';
 import { User } from '../models/User';
@@ -29,8 +30,11 @@ export class HelpMainComponent implements OnInit {
       case 'admin':
         this.menu = ADMIN_MENU_ITEMS;
         break;
+      case 'profesional':
+        this.menu = PROFESSIONAL_MENU_ITEMS;
+        break;
       default:
-        this.menu = ADMIN_MENU_ITEMS;
+        this.menu = [];
     }
   }
 }
