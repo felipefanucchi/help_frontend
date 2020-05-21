@@ -21,6 +21,7 @@ import {
   NbWindowModule,
 } from '@nebular/theme';
 import { ErrorInterceptor, TokenInterceptor } from './helpers';
+import { AuthenticationModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,7 +40,8 @@ import { ErrorInterceptor, TokenInterceptor } from './helpers';
       messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
     }),
     CoreModule.forRoot(),
-    ThemeModule.forRoot(),
+		ThemeModule.forRoot(),
+		AuthenticationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

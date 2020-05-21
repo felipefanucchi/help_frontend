@@ -30,7 +30,7 @@ export class AuthenticationService {
     login(email: string, password: string): Observable<any> {
         // const HandleUser = new HandleUserType(FakeUser.default.user);
         // const currentUser = HandleUser.create();
-        return this.http.post(`${environment.api}accounts/login/`, {
+        return this.http.post(`${environment.api}/accounts/login/`, {
             email,
             password
         }).pipe(map(this.handleLogin.bind(this)));

@@ -10,15 +10,22 @@ import {
 } from '@nebular/auth';
 import { AuthGuard } from './helpers';
 import { Role } from './models';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './auth/login/login.component';
 
 export const routes: Routes = [
   {
     path: 'pages',
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./dashboard/dashboard.module')
+      .then(m => m.DashboardModule),
     canActivate: [AuthGuard],
-    data: { roles: Role.Professional }
+    data: {
+      roles: [Role.Admin, Role.Help, Role.Professional, Role.Customer]
+    }
   },
   {
     path: 'auth',
