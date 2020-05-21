@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { User } from '../../models/User';
 
 @Component({
-  selector: 'app-login',
+  selector: 'auth-login',
   templateUrl: './login.component.html',
 })
 export class LoginComponent extends NbLoginComponent {

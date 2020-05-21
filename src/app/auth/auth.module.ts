@@ -1,8 +1,7 @@
 import { NgModule } from "@angular/core";
 import { NbInputModule, NbButtonModule } from '@nebular/theme';
-import { LoginComponent } from './login.component';
+import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
@@ -16,10 +15,7 @@ import { CommonModule } from '@angular/common';
 	declarations: [
 		LoginComponent
 	],
-	exports: [
-		LoginComponent
-	]
 })
-export class LoginModule {
+export class AuthenticationModule {
 
 }
