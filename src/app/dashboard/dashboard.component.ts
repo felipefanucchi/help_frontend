@@ -7,7 +7,7 @@ import { User } from '../models/User';
 
 @Component({
   selector: 'ngx-pages',
-  styleUrls: ['help.component.scss'],
+  styleUrls: ['dashboard.component.scss'],
   template: `
     <ngx-one-column-layout>
       <nb-menu [items]="menu"></nb-menu>
@@ -15,7 +15,7 @@ import { User } from '../models/User';
     </ngx-one-column-layout>
   `,
 })
-export class HelpMainComponent implements OnInit {
+export class DashboardComponent implements OnInit {
   menu: NbMenuItem[];
   currentUser: User;
 

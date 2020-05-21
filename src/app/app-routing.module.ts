@@ -10,7 +10,7 @@ import {
 } from '@nebular/auth';
 import { AuthGuard } from './helpers';
 import { Role } from './models';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './auth/login/login.component';
 
 export const routes: Routes = [
   {
@@ -20,8 +20,8 @@ export const routes: Routes = [
   },
   {
     path: 'dashboard',
-    loadChildren: () => import('./help/help.module')
-      .then(m => m.HelpModule),
+    loadChildren: () => import('./dashboard/dashboard.module')
+      .then(m => m.DashboardModule),
     canActivate: [AuthGuard],
     data: {
       roles: [Role.Admin, Role.Help, Role.Professional, Role.Customer]
