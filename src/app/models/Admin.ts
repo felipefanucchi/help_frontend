@@ -10,6 +10,7 @@ export class Admin extends User {
     neighborhood: string;
     city: string;
     state: string;
+    is_superuser = true;
     
     constructor(protected user: any) {
         super(user);
