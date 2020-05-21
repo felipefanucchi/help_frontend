@@ -10,7 +10,7 @@ import { User } from '../models/User';
   template: `
     <ngx-one-column-layout>
       <nb-menu [items]="menu"></nb-menu>
-      Hello World
+      <router-outlet></router-outlet>
     </ngx-one-column-layout>
   `,
 })
@@ -22,6 +22,8 @@ export class HelpMainComponent implements OnInit {
 
   ngOnInit(): void {
     this.currentUser = this.authenticationService.currentUserValue;
+    
+    if (!this.currentUser) return;
 
     switch(this.currentUser.role) {
       case 'admin':
