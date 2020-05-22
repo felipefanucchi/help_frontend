@@ -2,7 +2,12 @@ import { Component } from "@angular/core";
 
 @Component({
 	selector: 'admin-add-professional',
-	template: '<app-create-user [custom_fields]="fields" role="Profissional"></app-create-user>'
+	template: `
+	<app-create-user 
+		[custom_fields]="fields" 
+		role="Profissional" 
+		(event_submitted)="handleSubmit($event)"
+	></app-create-user>`
 })
 export class AddProfessionalComponent {
 	fields = [
@@ -39,4 +44,8 @@ export class AddProfessionalComponent {
 	];
 	
 	constructor() {}
+
+	handleSubmit(data) {
+		console.log(data, ' This data goes to API.')
+	}
 }
