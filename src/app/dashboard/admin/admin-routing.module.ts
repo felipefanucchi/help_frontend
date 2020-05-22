@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from '@angular/router';
 import { AddProfessionalComponent } from './add/professional/professional.component';
-import { AddContractorComponent } from './add/contractor/contractor.component';
+import { AddCustomerComponent } from './add/customer/customer.component';
 
 const routes: Routes = [
 	{
@@ -13,15 +13,15 @@ const routes: Routes = [
 			},
 			{
 				path: 'contratante',
-				component: AddContractorComponent
+				component: AddCustomerComponent
 			},
 		]
 	}
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule],
-  })
-  export class AdminRoutingModule {
-  }
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule],
+})
+export class AdminRoutingModule {
+}

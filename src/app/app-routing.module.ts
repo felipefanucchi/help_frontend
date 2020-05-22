@@ -17,6 +17,7 @@ export const routes: Routes = [
     path: 'pages',
     loadChildren: () => import('./pages/pages.module')
 			.then(m => m.PagesModule),
+		canActivate: [AuthGuard],
 		data: {
 			roles: [Role.Admin, Role.Help, Role.Professional, Role.Customer]
 		}
