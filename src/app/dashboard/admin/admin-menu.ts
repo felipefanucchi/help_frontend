@@ -17,23 +17,32 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
         },
         {
           title: 'Ver todos',
-          link: `${basePath}/lista/profissional'`
+          link: `${basePath}/lista/profissional`
         }
       ]
     },
     {
       title: 'Administradores',
       icon: 'person-outline',
-      link: `${basePath}/lista/admnistrador'`
+      link: `${basePath}/lista/admnistrador`
     },
     {
       title: 'Equipe Help',
       icon: 'plus-square-outline',
-      link: `${basePath}/lista/equipe-help'`
+      link: `${basePath}/lista/equipe-help`
     },
     {
       title: 'Contratantes',
       icon: 'people-outline',
-      link: `${basePath}/lista/contratante'`
+      children: [
+        {
+          title: 'Adicionar novo',
+          link: `${basePath}/adicionar/contratante`
+        },
+        {
+          title: 'Ver todos',
+          link: `${basePath}/lista/contratante`
+        }
+      ]
     },
   ];
