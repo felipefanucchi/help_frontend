@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { AdminRoutingModule } from './admin-routing.module';
 import { ComponentsModule } from '../../components/components.module';
 import { AddProfessionalComponent } from './add/professional/professional.component';
-import { AddContractorComponent } from './add/contractor/contractor.component';
+import { AddCustomerComponent } from './add/customer/customer.component';
 
 @NgModule({
   imports: [
@@ -11,7 +11,7 @@ import { AddContractorComponent } from './add/contractor/contractor.component';
   ],
   declarations: [
 		AddProfessionalComponent,
-		AddContractorComponent,
+		AddCustomerComponent
 	],
 })
 export class AdminModule {

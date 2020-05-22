@@ -7,6 +7,7 @@ import { Component, OnInit, Input } from "@angular/core";
 })
 export class CreateUserFormComponent implements OnInit {
 	@Input('custom_fields') customFields: string;
+	@Input() role: string;
 	
 	constructor() { }
 

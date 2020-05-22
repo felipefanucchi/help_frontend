@@ -1,1 +1,115 @@
-CRIAR FORMULARIO ONDE SERVIRÁ PARA ADICIONAR QQR TIPO DE USUÁRIO.
+<h4>Cadastrar novo {{role}}</h4>
+<form action="">
+	<nb-card>
+		<nb-card-header>Dados Pessoais</nb-card-header>
+		<nb-card-body>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="name" class="label">Nome</label>
+						<input type="text" nbInput fullWidth id="name" placeholder="João Castro da Silva">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="email" class="label">Email</label>
+						<input type="email" nbInput fullWidth id="email" placeholder="contato@help.com">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="document_number" class="label">CPF</label>
+						<input type="text" nbInput fullWidth id="document_number" placeholder="999.999.999-99">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="birthdate" class="label">Data de nascimento</label>
+						<input type="text" nbInput fullWidth id="birthdate" placeholder="99/99/9999">
+					</div>
+				</div>
+			</div>
+		</nb-card-body>
+	</nb-card>
+	<nb-card>
+		<nb-card-header>Endereço</nb-card-header>
+		<nb-card-body>
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="address" class="label">Logradouro</label>
+						<input type="text" nbInput fullWidth id="address" placeholder="Av. Brasil">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="address_number" class="label">Número</label>
+						<input type="text" nbInput fullWidth id="address_number" placeholder="99">
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label for="address_complement" class="label">Complemento</label>
+						<input type="text" nbInput fullWidth id="address_complement" placeholder="99 A">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="postal_code" class="label">Código Postal (CEP)</label>
+						<input type="text" nbInput fullWidth id="postal_code" placeholder="99999-999">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="neighborhood" class="label">Bairro</label>
+						<input type="text" nbInput fullWidth id="neighborhood" placeholder="Oscar Freire">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="city" class="label">Cidade</label>
+						<input type="text" nbInput fullWidth id="city" placeholder="São Paulo">
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="state" class="label">Estado</label>
+						<input type="text" nbInput fullWidth id="state" placeholder="São Paulo">
+					</div>
+				</div>
+			</div>
+		</nb-card-body>
+	</nb-card>
+	<nb-card *ngIf="customFields.length">
+		<nb-card-header>Dados do {{ role }}</nb-card-header>
+		<nb-card-body>
+			<div class="row">
+				<ng-container *ngFor="let field of customFields">
+					<div class="form-group {{ customFields.length === 1 ? 'col-md-12' : 'col-md-6' }}">
+						<ng-container [ngSwitch]="field?.type">
+							<ng-container *ngSwitchCase="'radio'">
+								<label for="field?.name" class="label">{{ field?.label }}</label>
+								<nb-radio-group>
+									<nb-radio *ngFor="let radio of field?.options" [value]="radio?.value">{{radio?.label}}</nb-radio>
+								</nb-radio-group>
+							</ng-container>
+							<ng-container *ngSwitchDefault>
+								<label for="field?.name" class="label">{{ field?.label }}</label>
+								<input type="text" nbInput fullWidth [id]="field?.name" [placeholder]="field?.placeholder">
+							</ng-container>
+						</ng-container>
+					</div>
+				</ng-container>
+				
+			</div>
+		</nb-card-body>
+	</nb-card>
+
+	<button type="submit" nbButton status="success">Cadastrar</button>
+</form>
