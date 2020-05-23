@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Professional } from '../../../../models';
 
 @Component({
 	selector: 'admin-add-professional',
@@ -20,7 +21,7 @@ export class AddProfessionalComponent {
 		{
 			type: 'text',
 			label: 'Número de Registro',
-			placeholder: ''
+			placeholder: 'CRx'
 		},
 		{
 			type: 'radio',
@@ -45,7 +46,7 @@ export class AddProfessionalComponent {
 	
 	constructor() {}
 
-	handleSubmit(data) {
+	handleSubmit(data: Professional): void {
 		console.log(data, ' This data goes to API.')
 	}
 }

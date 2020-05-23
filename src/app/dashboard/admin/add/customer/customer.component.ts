@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Customer } from '../../../../models';
 
 @Component({
 	selector: 'admin-add-customer',
@@ -21,7 +22,7 @@ export class AddCustomerComponent {
 
 	constructor() { }
 
-	handleSubmit(data) {
+	handleSubmit(data: Customer): void {
 		console.log(data, ' This data goes to API.')
 	}
 }
