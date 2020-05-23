@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { NbToastrService, NbIconConfig } from '@nebular/theme';
 
 @Component({
 	selector: 'app-create-user',
@@ -12,10 +13,11 @@ export class CreateUserFormComponent implements OnInit {
 	@Input() role: string;
 	@Output('event_submitted') submitted: EventEmitter<any> = new EventEmitter<any>();
 	formGroup: FormGroup;
-	formError: boolean;
+	wasSubmitted: boolean
 
 	constructor(
-		private formBuilder: FormBuilder
+		private formBuilder: FormBuilder,
+		private toastrService: NbToastrService
 	) {
 		this.formGroup = this.formBuilder.group({
 			name: [null, [Validators.required]],
@@ -35,24 +37,34 @@ export class CreateUserFormComponent implements OnInit {
 	ngOnInit(): void {
 		this.customFields.forEach((field: any) => {
 			this.formGroup.addControl(
-				field.name, new FormControl(null, Validators.required)
+				field.name, 
+				new FormControl(null, Validators.required)
 			);
 		});
-
-		this.formGroup.valueChanges.subscribe(change => {
-			this.formError = false;
-		})
 	}
 
 	private handleSubmit($event): void {
 		$event.preventDefault();
 		console.log(this.formGroup.invalid);
+		this.wasSubmitted = true;
+
 		if(this.formGroup.invalid) {
-			this.formError = true;
+			this.showToast('top-right', 'danger');
 			return;
 		};
 
 		const formData = this.formGroup.getRawValue();
 		this.submitted.emit(formData);
-	}	
+	}
+
+	showToast(position, status) {
+		const iconConfig = {
+			icon: 'alert-circle-outline',
+			pack: 'eva',
+			position,
+			status
+		};
+		
+    this.toastrService.show('valide os campos do formulário', 'Erro', iconConfig);
+  }
 }

@@ -15,8 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 		NbIconModule,
 		FormsModule,
 		ReactiveFormsModule,
-		NbRadioModule,
-		NbAlertModule
+		NbRadioModule
 	],
 	declarations: [
 		CreateUserFormComponent,
