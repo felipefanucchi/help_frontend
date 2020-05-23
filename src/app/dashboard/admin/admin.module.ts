@@ -3,6 +3,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { ComponentsModule } from '../../components/components.module';
 import { AddProfessionalComponent } from './add/professional/professional.component';
 import { AddCustomerComponent } from './add/customer/customer.component';
+import { AddAdministratorComponent } from './add/administrator/administrator.component';
+import { AddHelpCrewComponent } from './add/help-crew/help-crew.component';
 
 @NgModule({
   imports: [
@@ -11,7 +13,9 @@ import { AddCustomerComponent } from './add/customer/customer.component';
   ],
   declarations: [
 		AddProfessionalComponent,
-		AddCustomerComponent
+		AddCustomerComponent,
+		AddAdministratorComponent,
+		AddHelpCrewComponent,
 	],
 })
 export class AdminModule {
