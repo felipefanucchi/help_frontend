@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { Professional } from '../../../../models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
-import { NbToastrService, NbIconConfig } from '@nebular/theme';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
 	selector: 'admin-add-professional',
