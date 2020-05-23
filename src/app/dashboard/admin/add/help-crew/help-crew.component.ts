@@ -1,4 +1,8 @@
 import { Component } from "@angular/core";
+import { Help } from '../../../../models';
+import { HttpClient } from '@angular/common/http'
+import { environment } from '../../../../../environments/environment';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
 	selector: 'admin-add-help-crew',
@@ -7,12 +11,31 @@ import { Component } from "@angular/core";
 		[custom_fields]="[]" 
 		role="Membro Equipe Help" 
 		(event_submitted)="handleSubmit($event)"
+		[finished]="finished"
 	></app-create-user>`
 })
 export class AddHelpCrewComponent {
-	constructor() {}
+	finished: boolean;
 
-	handleSubmit(data) {
-		console.log(data, ' This data goes to API.')
+	constructor(
+		private http: HttpClient,
+		private toastrService: NbToastrService,
+	) {}
+
+	handleSubmit(data: Help) {
+		this.http.post(`${environment.api}/accounts/colaborador/`, data)
+			.subscribe(response => {
+				this.finished = true;
+				this.showFormSentToast('top-right', 'success');
+			});
+	}
+
+	showFormSentToast(position, status) {
+		const iconConfig = {
+			position,
+			status
+		};
+		
+    	this.toastrService.show('Formulário submetido', 'Sucesso', iconConfig);
 	}
 }
