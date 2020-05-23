@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
 import { ThemeModule } from '../@theme/theme.module';
-import { NbInputModule, NbCardModule, NbButtonModule, NbCheckboxModule, NbSelectModule, NbIconModule, NbRadioModule } from '@nebular/theme';
+import { NbInputModule, NbCardModule, NbButtonModule, NbCheckboxModule, NbSelectModule, NbIconModule, NbRadioModule, NbAlertModule } from '@nebular/theme';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -15,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 		NbIconModule,
 		FormsModule,
 		ReactiveFormsModule,
-		NbRadioModule
+		NbRadioModule,
+		NbAlertModule
 	],
 	declarations: [
 		CreateUserFormComponent,

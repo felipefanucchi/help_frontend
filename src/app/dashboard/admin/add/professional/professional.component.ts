@@ -1,5 +1,7 @@
 import { Component } from "@angular/core";
 import { Professional } from '../../../../models';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
 	selector: 'admin-add-professional',
@@ -21,7 +23,8 @@ export class AddProfessionalComponent {
 		{
 			type: 'text',
 			label: 'Número de Registro',
-			placeholder: 'CRx'
+			placeholder: 'CRx',
+			name: 'register_code'
 		},
 		{
 			type: 'radio',
@@ -44,9 +47,14 @@ export class AddProfessionalComponent {
 		}
 	];
 	
-	constructor() {}
+	constructor(
+		private http: HttpClient
+	) {}
 
 	handleSubmit(data: Professional): void {
-		console.log(data, ' This data goes to API.')
+		console.log(data, ' This data goes to API.');
+		
+		this.http.post(`${environment.api}/accounts/profesionals/`, data)
+			.subscribe(response => console.log(response));
 	}
 }

@@ -9,46 +9,46 @@ import { HandleUserType } from '../helpers';
 import * as FakeUser from '../fakeuser.json';
 
 @Injectable({
-    providedIn: 'root'
+	providedIn: 'root'
 })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
+	private currentUserSubject: BehaviorSubject<User>;
+	public currentUser: Observable<User>;
 
-    constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(
-            JSON.parse(localStorage.getItem('currentUser'))
-        );
+	constructor(private http: HttpClient) {
+		this.currentUserSubject = new BehaviorSubject<User>(
+			JSON.parse(localStorage.getItem('currentUser'))
+		);
 
-        this.currentUser = this.currentUserSubject.asObservable();
-    }
+		this.currentUser = this.currentUserSubject.asObservable();
+	}
 
-    public get currentUserValue() {
-        return this.currentUserSubject.value;
-    }
+	public get currentUserValue() {
+		return this.currentUserSubject.value;
+	}
 
-    login(email: string, password: string): Observable<any> {
-        // const HandleUser = new HandleUserType(FakeUser.default.user);
-        // const currentUser = HandleUser.create();
-        return this.http.post(`${environment.api}/accounts/login/`, {
-            email,
-            password
-        }).pipe(map(this.handleLogin.bind(this)));
-    }
+	login(email: string, password: string): Observable<any> {
+		// const HandleUser = new HandleUserType(FakeUser.default.user);
+		// const currentUser = HandleUser.create();
+		return this.http.post(`${environment.api}/accounts/login/`, {
+			email,
+			password
+		}).pipe(map(this.handleLogin.bind(this)));
+	}
 
-    logout(): void {
-        localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
-    }
+	logout(): void {
+		localStorage.removeItem('currentUser');
+		this.currentUserSubject.next(null);
+	}
 
-    private handleLogin(user: User): User {
-        if (user.token) {
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            this.currentUserSubject.next(user);
-        }
+	private handleLogin(user: User): User {
+		if (user.token) {
+			localStorage.setItem('currentUser', JSON.stringify(user));
+			this.currentUserSubject.next(user);
+		}
 
-        return user;
-    }
+		return user;
+	}
 
-    // Must implement the recover and register method.
+	// Must implement the recover and register method.
 }

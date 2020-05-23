@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
 	selector: 'app-create-user',
@@ -7,17 +8,18 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 	styleUrls: ['./create-user-form.component.scss']
 })
 export class CreateUserFormComponent implements OnInit {
-	@Input('custom_fields') customFields: string;
+	@Input('custom_fields') customFields: [];
 	@Input() role: string;
 	@Output('event_submitted') submitted: EventEmitter<any> = new EventEmitter<any>();
 	formGroup: FormGroup;
+	formError: boolean;
 
 	constructor(
 		private formBuilder: FormBuilder
 	) {
 		this.formGroup = this.formBuilder.group({
 			name: [null, [Validators.required]],
-			email: [null, [Validators.required]],
+			email: [null, [Validators.required, Validators.email]],
 			document_number: [null, [Validators.required]],
 			birthdate: [null, [Validators.required]],
 			address: [null, [Validators.required]],
@@ -31,17 +33,26 @@ export class CreateUserFormComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+		this.customFields.forEach((field: any) => {
+			this.formGroup.addControl(
+				field.name, new FormControl(null, Validators.required)
+			);
+		});
 
+		this.formGroup.valueChanges.subscribe(change => {
+			this.formError = false;
+		})
 	}
 
 	private handleSubmit($event): void {
 		$event.preventDefault();
+		console.log(this.formGroup.invalid);
+		if(this.formGroup.invalid) {
+			this.formError = true;
+			return;
+		};
 
 		const formData = this.formGroup.getRawValue();
-
-		console.log(`Form ${this.role} submitted.`);
-		console.log(`Form ${this.role} data: `, formData);
-
 		this.submitted.emit(formData);
 	}	
 }

@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import { Admin } from '../../../../models';
 
 @Component({
 	selector: 'admin-add-administrator',
@@ -45,7 +46,10 @@ export class AddAdministratorComponent {
 	
 	constructor() {}
 
-	handleSubmit(data) {
-		console.log(data, ' This data goes to API.')
+	handleSubmit(data: Admin): void {
+		console.log(data, ' This data goes to API.');
+		Object.assign(data, {
+			is_superadmin: true
+		})
 	}
 }

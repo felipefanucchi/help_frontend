@@ -7,28 +7,28 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-    fordiddenStatuscode = [401, 403];
+	fordiddenStatuscode = [401, 403];
 
-    constructor(
-        private authenticationService: AuthenticationService,
-        private router: Router
-    ) {}
+	constructor(
+		private authenticationService: AuthenticationService,
+		private router: Router
+	) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError(this.handleErrors));
-    }
+	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		return next.handle(request).pipe(catchError(this.handleErrors));
+	}
 
-    private handleErrors(err: HttpErrorResponse): Observable<HttpEvent<any>> {
-        // check if the route is forbidden
-        if (this.fordiddenStatuscode.indexOf(err.status) !== -1) {
-            this.authenticationService.logout();
-            this.router.navigateByUrl('/', {
-                skipLocationChange: true
-            })
-        }
+	private handleErrors(err: HttpErrorResponse): Observable<HttpEvent<any>> {
+		// check if the route is forbidden
+		if (this.fordiddenStatuscode.indexOf(err.status) !== -1) {
+			this.authenticationService.logout();
+			this.router.navigateByUrl('/auth', {
+				skipLocationChange: true
+			})
+		}
 
-        const error = err.error.message || err.statusText;
+		const error = err.error.message || err.statusText;
 
-        return throwError(error);
-    }
+		return throwError(error);
+	}
 }
