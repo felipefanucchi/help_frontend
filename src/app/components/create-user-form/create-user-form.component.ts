@@ -1,15 +1,17 @@
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NbToastrService, NbIconConfig } from '@nebular/theme';
+import { Control } from 'leaflet';
 
 @Component({
 	selector: 'app-create-user',
 	templateUrl: './create-user-form.component.html',
 	styleUrls: ['./create-user-form.component.scss']
 })
-export class CreateUserFormComponent implements OnInit {
+export class CreateUserFormComponent implements OnInit, OnChanges {
 	@Input('custom_fields') customFields: [];
+	@Input('finished') finished: boolean;
 	@Input() role: string;
 	@Output('event_submitted') submitted: EventEmitter<any> = new EventEmitter<any>();
 	formGroup: FormGroup;
@@ -41,6 +43,12 @@ export class CreateUserFormComponent implements OnInit {
 				new FormControl(null, Validators.required)
 			);
 		});
+	}
+
+	ngOnChanges(change): void {
+		if (!this.finished) return;
+		this.formGroup.reset();
+		this.wasSubmitted = false;
 	}
 
 	private handleSubmit($event): void {

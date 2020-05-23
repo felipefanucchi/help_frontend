@@ -10,6 +10,7 @@ import { environment } from '../../../../../environments/environment';
 		[custom_fields]="fields" 
 		role="Profissional" 
 		(event_submitted)="handleSubmit($event)"
+		[finished]="finished"
 	></app-create-user>`
 })
 export class AddProfessionalComponent {
@@ -46,6 +47,7 @@ export class AddProfessionalComponent {
 			]
 		}
 	];
+	finished: boolean;
 	
 	constructor(
 		private http: HttpClient
@@ -56,6 +58,7 @@ export class AddProfessionalComponent {
 		
 		this.http.post(`${environment.api}/accounts/profesionals/`, data)
 			.subscribe(response => {
+				this.finished = true;
 				// Toastr de sucesso.
 				// Redirecionar para listagem.
 			});
