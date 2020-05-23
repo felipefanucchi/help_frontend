@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import { Professional } from '../../../../models';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
+import { NbToastrService, NbIconConfig } from '@nebular/theme';
 
 @Component({
 	selector: 'admin-add-professional',
@@ -50,7 +51,8 @@ export class AddProfessionalComponent {
 	finished: boolean;
 	
 	constructor(
-		private http: HttpClient
+		private http: HttpClient,
+		private toastrService: NbToastrService
 	) {}
 
 	handleSubmit(data: Professional): void {
@@ -59,8 +61,16 @@ export class AddProfessionalComponent {
 		this.http.post(`${environment.api}/accounts/profesionals/`, data)
 			.subscribe(response => {
 				this.finished = true;
-				// Toastr de sucesso.
-				// Redirecionar para listagem.
+				this.showFormSentToast('top-right', 'success');
 			});
 	}
+
+	showFormSentToast(position, status) {
+		const iconConfig = {
+			position,
+			status
+		};
+		
+    this.toastrService.show('Formulário submetido', 'Sucesso', iconConfig);
+  }
 }
