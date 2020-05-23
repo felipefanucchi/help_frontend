@@ -22,7 +22,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="email" class="label">Email</label>address_number
+						<label for="email" class="label">Email</label>
 						<input 
 							[ngClass]="{ 
 								'status-danger': formGroup.get('email')?.invalid && wasSubmitted 
@@ -62,7 +62,7 @@
 								'status-danger': formGroup.get('birthdate')?.invalid && wasSubmitted 
 							}" 
 							formControlName="birthdate" 
-							type="date" 
+							type="text" 
 							nbInput 
 							fullWidth 
 							id="birthdate" 

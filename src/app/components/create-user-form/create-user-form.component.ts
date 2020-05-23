@@ -45,16 +45,25 @@ export class CreateUserFormComponent implements OnInit {
 
 	private handleSubmit($event): void {
 		$event.preventDefault();
-		console.log(this.formGroup.invalid);
 		this.wasSubmitted = true;
 
-		if(this.formGroup.invalid) {
-			this.showToast('top-right', 'danger');
-			return;
-		};
+		// if(this.formGroup.invalid) {
+		// 	this.showToast('top-right', 'danger');
+		// 	return;
+		// }
 
 		const formData = this.formGroup.getRawValue();
+		const birthdate = this.handleBirth(formData.birthdate);
+
+		Object.assign(formData, { birthdate });
+
+		console.log(formData)
+
 		this.submitted.emit(formData);
+	}
+
+	handleBirth(date) {
+		return date.split('/').reverse().join('-');
 	}
 
 	showToast(position, status) {
