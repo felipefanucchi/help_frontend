@@ -55,6 +55,9 @@ export class AddProfessionalComponent {
 		console.log(data, ' This data goes to API.');
 		
 		this.http.post(`${environment.api}/accounts/profesionals/`, data)
-			.subscribe(response => console.log(response));
+			.subscribe(response => {
+				// Toastr de sucesso.
+				// Redirecionar para listagem.
+			});
 	}
 }
