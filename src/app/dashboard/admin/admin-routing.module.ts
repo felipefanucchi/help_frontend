@@ -6,6 +6,8 @@ import { AddAdministratorComponent } from './add/administrator/administrator.com
 import { AddHelpCrewComponent } from './add/help-crew/help-crew.component';
 import { ListProfessionalComponent } from './list/professional/professional.component';
 import { ListCustomerComponent } from './list/customer/customer.component';
+import { ListAdminComponent } from './list/admin/admin.component';
+import { ListHelpCrewComponent } from './list/help-crew/help-crew.component';
 
 const routes: Routes = [
 	{
@@ -39,6 +41,14 @@ const routes: Routes = [
 			{
 				path: 'contratante',
 				component: ListCustomerComponent
+			},
+			{
+				path: 'administrador',
+				component: ListAdminComponent
+			},
+			{
+				path: 'equipe-help',
+				component: ListHelpCrewComponent
 			},
 		]
 	}

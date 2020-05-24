@@ -3,11 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 
 @Component({
-	selector: 'admin-smart-table-professional',
+	selector: 'admin-smart-table-admin',
 	template: `
 		<app-smart-user-table
-			[columns]="columns"
-			role="Profissional"
+			role="Administrador"
 			[data]="data"
 			(delete)="handleDelete($event)"
 			[deleted_event]="deletedEvent"
@@ -15,22 +14,7 @@ import { environment } from '../../../../../environments/environment';
 	`
 })
 
-export class ListProfessionalComponent implements OnInit {
-	columns = {
-		register_code: {
-			title: 'Código de Registro',
-			type: 'string'
-		},
-		cost: {
-			title: 'Preço',
-			type: 'string'
-		},
-		service: {
-			title: 'Serviço',
-			type: 'string'
-		}
-	};
-
+export class ListAdminComponent implements OnInit {
 	data: Array<any>;
 	deletedEvent: any;
 
@@ -39,8 +23,8 @@ export class ListProfessionalComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.http.get(`${environment.api}/accounts/profesionals/`)
-			.subscribe(response => this.parseResponse(response));
+		this.http.get(`${environment.api}/accounts/admin/`)
+			.subscribe((response) => this.parseResponse(response));
 	}
 
 	private parseResponse(response) {
@@ -52,7 +36,7 @@ export class ListProfessionalComponent implements OnInit {
 		
 		const id = $event.data.id;
 
-		this.http.delete(`${environment.api}/accounts/profesionals/${id}`)
+		this.http.delete(`${environment.api}/accounts/admin/${id}`)
 			.subscribe(() => this.deletedEvent = $event);
 	}
 }

@@ -7,6 +7,8 @@ import { AddAdministratorComponent } from './add/administrator/administrator.com
 import { AddHelpCrewComponent } from './add/help-crew/help-crew.component';
 import { ListCustomerComponent } from './list/customer/customer.component';
 import { ListProfessionalComponent } from './list/professional/professional.component';
+import { ListAdminComponent } from './list/admin/admin.component';
+import { ListHelpCrewComponent } from './list/help-crew/help-crew.component';
 
 @NgModule({
   imports: [
@@ -19,7 +21,9 @@ import { ListProfessionalComponent } from './list/professional/professional.comp
 		AddAdministratorComponent,
 		AddHelpCrewComponent,
 		ListCustomerComponent,
-		ListProfessionalComponent
+		ListProfessionalComponent,
+		ListAdminComponent,
+		ListHelpCrewComponent
 	],
 })
 export class AdminModule {

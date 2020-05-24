@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { SmartTableData } from '../../@core/data/smart-table';
 
@@ -11,6 +11,8 @@ export class SmartUserTableComponent implements OnInit {
 	@Input() columns: Array<any>;
 	@Input() role: string;
 	@Input() data: Array<any>;
+	@Input('deleted_event') deletedEvent: any;
+	@Output() delete: EventEmitter<any> = new EventEmitter<any>();
 
   settings: any;
 
@@ -20,16 +22,25 @@ export class SmartUserTableComponent implements OnInit {
 		this.buildColumns(this.columns);
 	}
 
-  onDeleteConfirm(event): void {
-    if (window.confirm(`Deseja deletar o ${this.role} atual`)) {
-      event.confirm.resolve();
+	ngOnChanges(change): void {
+		console.log(this.deletedEvent);
+		if (this.deletedEvent && this.deletedEvent.confirm && window.confirm(`Deseja deletar o ${this.role} atual`)) {
+      this.deletedEvent.confirm.resolve();
     } else {
-      event.confirm.reject();
+      this.deletedEvent.confirm.reject();
     }
+	}
+
+  onDeleteConfirm(event): void {
+		this.delete.emit(event);
 	}
 	
 	private buildColumns(data: Object): void {
 		const columns = {
+			id: {
+				title: 'ID',
+				type: 'number'
+			},
 			name: {
 				title: 'Nome Completo',
 				type: 'string'
@@ -76,12 +87,10 @@ export class SmartUserTableComponent implements OnInit {
 			},
 		};
 
-		console.log(this.columns);
-
 		this.settings = {
 			actions: {
 				add: false,
-				columnTitle: 'Ações'
+				columnTitle: 'Ações',
 			},
 			edit: {
 				editButtonContent: '<i class="nb-edit"></i>',
