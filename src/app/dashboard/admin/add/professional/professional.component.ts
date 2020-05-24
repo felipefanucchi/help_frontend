@@ -1,8 +1,18 @@
 import { Component } from "@angular/core";
+import { Professional } from '../../../../models';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../../environments/environment';
+import { NbToastrService } from '@nebular/theme';
 
 @Component({
 	selector: 'admin-add-professional',
-	template: '<app-create-user [custom_fields]="fields" role="Profissional"></app-create-user>'
+	template: `
+	<app-create-user 
+		[custom_fields]="fields" 
+		role="Profissional" 
+		(event_submitted)="handleSubmit($event)"
+		[finished]="finished"
+	></app-create-user>`
 })
 export class AddProfessionalComponent {
 	fields = [
@@ -15,7 +25,8 @@ export class AddProfessionalComponent {
 		{
 			type: 'text',
 			label: 'Número de Registro',
-			placeholder: ''
+			placeholder: 'CRx',
+			name: 'register_code'
 		},
 		{
 			type: 'radio',
@@ -37,6 +48,29 @@ export class AddProfessionalComponent {
 			]
 		}
 	];
+	finished: boolean;
 	
-	constructor() {}
+	constructor(
+		private http: HttpClient,
+		private toastrService: NbToastrService
+	) {}
+
+	handleSubmit(data: Professional): void {
+		console.log(data, ' This data goes to API.');
+		
+		this.http.post(`${environment.api}/accounts/profesionals/`, data)
+			.subscribe(response => {
+				this.finished = true;
+				this.showFormSentToast('top-right', 'success');
+			});
+	}
+
+	showFormSentToast(position, status) {
+		const iconConfig = {
+			position,
+			status
+		};
+		
+    this.toastrService.show('Formulário submetido', 'Sucesso', iconConfig);
+  }
 }

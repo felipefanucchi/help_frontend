@@ -7,21 +7,21 @@ import { Professional, Admin, Customer } from '../models';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
-    constructor(private authencationService: AuthenticationService) {}
+	constructor(private authencationService: AuthenticationService) { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const currentUser = this.authencationService.currentUserValue;
-        const isLoggedIn = currentUser && currentUser.token;
-        const isApiUrl = request.url.startsWith(environment.api);
+	intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+		const currentUser = this.authencationService.currentUserValue;
+		const isLoggedIn = currentUser && currentUser.token;
+		const isApiUrl = request.url.startsWith(environment.api);
 
-        if (isApiUrl && isLoggedIn) {
-            request = request.clone({
-                setHeaders: {
-                    Authorization: `Token ${currentUser.token}`
-                }
-            })
-        }
-        
-        return next.handle(request);
-    }
+		if (isApiUrl && isLoggedIn) {
+			request = request.clone({
+				setHeaders: {
+					Authorization: `Token ${currentUser.token}`
+				}
+			})
+		}
+
+		return next.handle(request);
+	}
 }

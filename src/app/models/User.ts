@@ -1,11 +1,11 @@
 import { Role } from './roles';
 
 export class User {
-    email: string;
-    token?: string;
-    role: Role;
+	email: string;
+	token?: string;
+	role: Role;
 
-    constructor(protected user: User) {
-        Object.assign(this, user);
-    }
+	constructor(protected user: User) {
+		Object.assign(this, user);
+	}
 }

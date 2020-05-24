@@ -24,12 +24,30 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     {
       title: 'Administradores',
       icon: 'person-outline',
-      link: `${basePath}/lista/admnistrador`
+      children: [
+        {
+          title: 'Adicionar novo',
+          link: `${basePath}/adicionar/administrador`
+        },
+        {
+          title: 'Ver todos',
+          link: `${basePath}/lista/administrador`
+        }
+      ]
     },
     {
       title: 'Equipe Help',
       icon: 'plus-square-outline',
-      link: `${basePath}/lista/equipe-help`
+      children: [
+        {
+          title: 'Adicionar novo',
+          link: `${basePath}/adicionar/equipe-help`
+        },
+        {
+          title: 'Ver todos',
+          link: `${basePath}/lista/equipe-help`
+        }
+      ]
     },
     {
       title: 'Contratantes',

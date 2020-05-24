@@ -1,37 +1,33 @@
 import { Component } from "@angular/core";
-import { Customer } from '../../../../models';
-import { HttpClient } from '@angular/common/http';
+import { Admin } from '../../../../models';
+import { HttpClient } from '@angular/common/http'
 import { environment } from '../../../../../environments/environment';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
-	selector: 'admin-add-customer',
+	selector: 'admin-add-administrator',
 	template: `
 	<app-create-user 
-		[custom_fields]="fields" 
-		role="Contratante" 
+		[custom_fields]="[]" 
+		role="Administrador" 
 		(event_submitted)="handleSubmit($event)"
 		[finished]="finished"
 	></app-create-user>`
 })
-export class AddCustomerComponent {
-	fields = [
-		{
-			type: 'text',
-			label: 'Preço',
-			placeholder: 'R$ 99,90',
-			name: 'cost'
-		}
-	];
+export class AddAdministratorComponent {
 	finished: boolean;
 
 	constructor(
 		private http: HttpClient,
 		private toastrService: NbToastrService,
-	) { }
+	) {}
 
-	handleSubmit(data: Customer): void {
-		this.http.post(`${environment.api}/accounts/customers/`, data)
+	handleSubmit(data: Admin): void {
+		Object.assign(data, {
+			is_superuser: true
+		})
+
+		this.http.post(`${environment.api}/accounts/admin/`, data)
 			.subscribe(response => {
 				this.finished = true;
 				this.showFormSentToast('top-right', 'success');

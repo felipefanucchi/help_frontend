@@ -41,7 +41,8 @@ import { AuthenticationModule } from './auth/auth.module';
     }),
     CoreModule.forRoot(),
 		ThemeModule.forRoot(),
-		AuthenticationModule
+		AuthenticationModule,
+		NbToastrModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
