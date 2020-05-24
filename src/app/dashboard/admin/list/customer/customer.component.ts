@@ -21,7 +21,7 @@ export class ListCustomerComponent implements OnInit {
 		}
 	};
 
-	data: any;
+	data: Array<any>;
 
 	constructor(
 		private http: HttpClient

@@ -20,9 +20,6 @@ export class SmartUserTableComponent implements OnInit {
 		this.buildColumns(this.columns);
 	}
 
-	ngOnChanges() {
-	}
-
   onDeleteConfirm(event): void {
     if (window.confirm(`Deseja deletar o ${this.role} atual`)) {
       event.confirm.resolve();
@@ -78,6 +75,8 @@ export class SmartUserTableComponent implements OnInit {
 				type: 'string'
 			},
 		};
+
+		console.log(this.columns);
 
 		this.settings = {
 			actions: {
