@@ -4,6 +4,8 @@ import { AddProfessionalComponent } from './add/professional/professional.compon
 import { AddCustomerComponent } from './add/customer/customer.component';
 import { AddAdministratorComponent } from './add/administrator/administrator.component';
 import { AddHelpCrewComponent } from './add/help-crew/help-crew.component';
+import { ListProfessionalComponent } from './list/professional/professional.component';
+import { ListCustomerComponent } from './list/customer/customer.component';
 
 const routes: Routes = [
 	{
@@ -24,6 +26,19 @@ const routes: Routes = [
 			{
 				path: 'equipe-help',
 				component: AddHelpCrewComponent
+			},
+		],
+	},
+	{
+		path: 'lista',
+		children: [
+			{
+				path: 'profissional',
+				component: ListProfessionalComponent
+			},
+			{
+				path: 'contratante',
+				component: ListCustomerComponent
 			},
 		]
 	}
