@@ -1,38 +1,74 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
-import { SmartTableData } from '../../@core/data/smart-table';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { NbToastrConfig, NbToastrService } from '@nebular/theme';
 
 @Component({
 	selector: 'app-smart-user-table',
 	templateUrl: 'smart-user-table.component.html'
 })
 
-export class SmartUserTableComponent implements OnInit {
+export class SmartUserTableComponent implements OnInit, OnChanges {
 	@Input() columns: Array<any>;
 	@Input() role: string;
 	@Input() data: Array<any>;
-	@Input('deleted_event') deletedEvent: any;
+	@Input() deleted: boolean;
+	@Input() edited: boolean;
+
 	@Output() delete: EventEmitter<any> = new EventEmitter<any>();
+	@Output() edit: EventEmitter<any> = new EventEmitter<any>();
 
   settings: any;
 
-  constructor() {}
+  constructor(private toastrService: NbToastrService) {}
 	
 	ngOnInit(): void {
 		this.buildColumns(this.columns);
 	}
 
-	ngOnChanges(change): void {
-		console.log(this.deletedEvent);
-		if (this.deletedEvent && this.deletedEvent.confirm && window.confirm(`Deseja deletar o ${this.role} atual`)) {
-      this.deletedEvent.confirm.resolve();
-    } else {
-      this.deletedEvent.confirm.reject();
-    }
+	ngOnChanges(changes: SimpleChanges): void {
+		if(changes.deleted?.currentValue) {
+			this.showToastr('Usuário deletado com sucesso', 'top-right', 'warning');
+		}
+		if(changes.edited?.currentValue) {
+			this.showToastr('Usuário editado com sucesso', 'top-right', 'success');
+		}
+	}
+	
+  async onDeleteConfirm(event) {
+		const userResponse = await this.handleDeleteEvent(event);
+		if (!userResponse) return
+
+		this.delete.emit(event)
 	}
 
-  onDeleteConfirm(event): void {
-		this.delete.emit(event);
+	async onEditConfirm(event) {
+		const userResponse = await this.handleEditEvent(event);
+		if (!userResponse) return
+
+		this.edit.emit(event)
+	}
+
+	private async handleDeleteEvent(event) {
+		return new Promise(async (resolve, reject) => {
+			if (event?.confirm && window.confirm(`Deseja deletar o ${this.role} atual`)) {
+				await event.confirm.resolve();
+				resolve(true);
+			} else {
+				await event.confirm.reject();
+				reject(false);
+			}
+		})
+	}
+
+	private async handleEditEvent(event) {
+		return new Promise(async (resolve, reject) => {
+			if (event?.confirm && window.confirm(`Deseja editar o ${this.role} atual`)) {
+				await event.confirm.resolve();
+				resolve(true);
+			} else {
+				await event.confirm.reject();
+				reject(false);
+			}
+		})
 	}
 	
 	private buildColumns(data: Object): void {
@@ -96,6 +132,7 @@ export class SmartUserTableComponent implements OnInit {
 				editButtonContent: '<i class="nb-edit"></i>',
 				saveButtonContent: '<i class="nb-checkmark"></i>',
 				cancelButtonContent: '<i class="nb-close"></i>',
+				confirmSave: true,
 			},
 			delete: {
 				deleteButtonContent: '<i class="nb-trash"></i>',
@@ -103,5 +140,14 @@ export class SmartUserTableComponent implements OnInit {
 			},
 			columns: Object.assign(columns, data)
 		};
+	}
+
+	private showToastr(message: string, position: string, status: string) {
+		const iconConfig = {
+			position,
+			status
+		};
+
+		this.toastrService.show(null, message, iconConfig as NbToastrConfig);
 	}
 }

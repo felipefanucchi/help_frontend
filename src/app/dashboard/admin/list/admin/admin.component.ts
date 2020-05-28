@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
+import { Admin } from '../../../../models';
+import { ListResponse } from '../../../../interfaces';
+import { NbToastrService, NbToastrConfig } from '@nebular/theme';
 
 @Component({
 	selector: 'admin-smart-table-admin',
@@ -9,34 +12,45 @@ import { environment } from '../../../../../environments/environment';
 			role="Administrador"
 			[data]="data"
 			(delete)="handleDelete($event)"
-			[deleted_event]="deletedEvent"
+			(edit)="handleEdit($event)"
+			[deleted]="deleted"
+			[edited]="edited"
 		></app-smart-user-table>
 	`
 })
 
 export class ListAdminComponent implements OnInit {
 	data: Array<any>;
-	deletedEvent: any;
+	deleted: boolean;
+	edited: boolean;
 
 	constructor(
-		private http: HttpClient
+		private http: HttpClient,
 	) {}
 
 	ngOnInit(): void {
 		this.http.get(`${environment.api}/accounts/admin/`)
-			.subscribe((response) => this.parseResponse(response));
+			.subscribe((response: ListResponse<Admin>) => this.parseResponse(response));
 	}
 
-	private parseResponse(response) {
+	private parseResponse(response: ListResponse<Admin>) {
 		this.data = response.results;
 	}
 
-	handleDelete($event) {
-		if (!$event.data) return;
-		
-		const id = $event.data.id;
+	handleDelete({ data }) {
+		if (!data) return;
+		const user: Admin = data;
 
-		this.http.delete(`${environment.api}/accounts/admin/${id}`)
-			.subscribe(() => this.deletedEvent = $event);
+		this.http.delete(`${environment.api}/accounts/admin/${user.id}`)
+			.subscribe(() => this.deleted = true);
 	}
+
+	handleEdit({ data }) {
+		if (!data) return;
+		const user: Admin = data;
+
+		this.http.put(`${environment.api}/accounts/admin/${user.id}/`, user)
+			.subscribe(response => this.edited = true);
+	}
+
 }

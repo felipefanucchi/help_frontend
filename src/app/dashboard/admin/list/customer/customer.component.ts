@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
+import { ListResponse } from '../../../../interfaces';
+import { Help, Customer } from '../../../../models';
 
 @Component({
 	selector: 'admin-smart-table-customer',
@@ -10,7 +12,9 @@ import { environment } from '../../../../../environments/environment';
 			role="Contratante"
 			[data]="data"
 			(delete)="handleDelete($event)"
-			[deleted_event]="deletedEvent"
+			(edit)="handleEdit($event)"
+			[deleted]="deleted"
+			[edited]="edited"
 		></app-smart-user-table>
 	`
 })
@@ -24,7 +28,8 @@ export class ListCustomerComponent implements OnInit {
 	};
 
 	data: Array<any>;
-	deletedEvent: any;
+	deleted: boolean;
+	edited: boolean;
 
 	constructor(
 		private http: HttpClient
@@ -32,19 +37,26 @@ export class ListCustomerComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.http.get(`${environment.api}/accounts/customers/`)
-			.subscribe((response) => this.parseResponse(response));
+			.subscribe((response: ListResponse<Customer>) => this.parseResponse(response));
 	}
 
-	private parseResponse(response) {
+	private parseResponse(response: ListResponse<Customer>) {
 		this.data = response.results;
 	}
 
-	handleDelete($event) {
-		if (!$event.data) return;
-		
-		const id = $event.data.id;
+	handleDelete({ data }) {
+		if (!data) return;
+		const user: Customer = data;
 
-		this.http.delete(`${environment.api}/accounts/customers/${id}`)
-			.subscribe(() => this.deletedEvent = $event);
+		this.http.delete(`${environment.api}/accounts/customers/${user.id}`)
+			.subscribe(() => this.deleted = true);
+	}
+
+	handleEdit({ data }) {
+		if (!data) return;
+		const user: Customer = data;
+
+		this.http.put(`${environment.api}/accounts/customers/${user.id}/`, user)
+			.subscribe(() => this.edited = true);
 	}
 }

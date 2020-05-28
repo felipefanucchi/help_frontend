@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
+import { ListResponse } from '../../../../interfaces';
+import { Professional } from '../../../../models';
 
 @Component({
 	selector: 'admin-smart-table-professional',
@@ -10,7 +12,9 @@ import { environment } from '../../../../../environments/environment';
 			role="Profissional"
 			[data]="data"
 			(delete)="handleDelete($event)"
-			[deleted_event]="deletedEvent"
+			(edit)="handleEdit($event)"
+			[deleted]="deleted"
+			[edited]="edited"
 		></app-smart-user-table>
 	`
 })
@@ -32,7 +36,8 @@ export class ListProfessionalComponent implements OnInit {
 	};
 
 	data: Array<any>;
-	deletedEvent: any;
+	deleted: boolean;
+	edited: boolean;
 
 	constructor(
 		private http: HttpClient
@@ -40,19 +45,26 @@ export class ListProfessionalComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.http.get(`${environment.api}/accounts/profesionals/`)
-			.subscribe(response => this.parseResponse(response));
+			.subscribe((response: ListResponse<Professional>) => this.parseResponse(response));
 	}
 
-	private parseResponse(response) {
+	private parseResponse(response : ListResponse<Professional>) {
 		this.data = response.results;
 	}
 
-	handleDelete($event) {
-		if (!$event.data) return;
-		
-		const id = $event.data.id;
+	handleDelete({ data }) {
+		if (!data) return;
+		const user: Professional = data;
 
-		this.http.delete(`${environment.api}/accounts/profesionals/${id}`)
-			.subscribe(() => this.deletedEvent = $event);
+		this.http.delete(`${environment.api}/accounts/profesionals/${user.id}`)
+			.subscribe(() => this.deleted = true);
+	}
+
+	handleEdit({ data }) {
+		if (!data) return;
+		const user: Professional = data;
+
+		this.http.put(`${environment.api}/accounts/profesionals/${user.id}/`, data)
+			.subscribe(() => this.edited = true);
 	}
 }

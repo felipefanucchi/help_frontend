@@ -20,11 +20,11 @@ export class AddHelpCrewComponent {
 	constructor(
 		private http: HttpClient,
 		private toastrService: NbToastrService,
-	) {}
+	) { }
 
 	handleSubmit(data: Help) {
-		this.http.post(`${environment.api}/accounts/colaborador/`, data)
-			.subscribe(response => {
+		this.http.post(`${environment.api}/accounts/help/`, data)
+			.subscribe(() => {
 				this.finished = true;
 				this.showFormSentToast('top-right', 'success');
 			});
@@ -35,7 +35,7 @@ export class AddHelpCrewComponent {
 			position,
 			status
 		};
-		
-    	this.toastrService.show('Formulário submetido', 'Sucesso', iconConfig);
+
+		this.toastrService.show('Formulário submetido', 'Sucesso', iconConfig);
 	}
 }

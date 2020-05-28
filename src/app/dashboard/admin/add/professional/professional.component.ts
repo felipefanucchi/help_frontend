@@ -59,7 +59,7 @@ export class AddProfessionalComponent {
 		console.log(data, ' This data goes to API.');
 		
 		this.http.post(`${environment.api}/accounts/profesionals/`, data)
-			.subscribe(response => {
+			.subscribe(() => {
 				this.finished = true;
 				this.showFormSentToast('top-right', 'success');
 			});
