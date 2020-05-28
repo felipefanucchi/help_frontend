@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { Admin } from '../../../../models';
 import { ListResponse } from '../../../../interfaces';
+import { NbToastrService, NbToastrConfig } from '@nebular/theme';
 
 @Component({
 	selector: 'admin-smart-table-admin',
@@ -11,17 +12,17 @@ import { ListResponse } from '../../../../interfaces';
 			role="Administrador"
 			[data]="data"
 			(delete)="handleDelete($event)"
-			[deleted_event]="deletedEvent"
+			[deleted]="deleted"
 		></app-smart-user-table>
 	`
 })
 
 export class ListAdminComponent implements OnInit {
 	data: Array<any>;
-	deletedEvent: any;
+	deleted: boolean;
 
 	constructor(
-		private http: HttpClient
+		private http: HttpClient,
 	) {}
 
 	ngOnInit(): void {
@@ -36,9 +37,11 @@ export class ListAdminComponent implements OnInit {
 	handleDelete($event) {
 		if (!$event.data) return;
 		
-		const id = $event.data.id;
+		const data: Admin = $event.data;
+		const id = data.id;
 
 		this.http.delete(`${environment.api}/accounts/admin/${id}`)
-			.subscribe(() => this.deletedEvent = $event);
+			.subscribe(() => this.deleted = true);
 	}
+
 }
