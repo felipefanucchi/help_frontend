@@ -23,8 +23,9 @@ export class SmartUserTableComponent implements OnInit {
 	}
 
 	ngOnChanges(change): void {
-		console.log(this.deletedEvent);
-		if (this.deletedEvent && this.deletedEvent.confirm && window.confirm(`Deseja deletar o ${this.role} atual`)) {
+		if (!this.deletedEvent) return;
+
+		if (this.deletedEvent.confirm && window.confirm(`Deseja deletar o ${this.role} atual`)) {
       this.deletedEvent.confirm.resolve();
     } else {
       this.deletedEvent.confirm.reject();
