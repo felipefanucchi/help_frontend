@@ -34,23 +34,19 @@ export class ListHelpCrewComponent implements OnInit {
 		this.data = response.results;
 	}
 
-	handleDelete($event) {
-		if (!$event.data) return;
-		
-		const data: Help = $event.data;
-		const id = data.id;
+	handleDelete({ data }) {
+		if (!data) return;
+		const user: Help = data;
 
-		this.http.delete(`${environment.api}/accounts/help/${id}`)
+		this.http.delete(`${environment.api}/accounts/help/${user.id}`)
 			.subscribe(() => this.deleted = true);
 	}
 	
-	handleEdit($event) {
-		if (!$event.data) return;
-		
-		const data: Help = $event.data;
-		const id = data.id;
+	handleEdit({ data }) {
+		if (!data) return;
+		const user: Help = data;
 
-		this.http.put(`${environment.api}/accounts/help/${id}`, data)
+		this.http.put(`${environment.api}/accounts/help/${user.id}`, user)
 			.subscribe(() => this.edited = true);
 	}
 }

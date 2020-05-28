@@ -43,23 +43,19 @@ export class ListCustomerComponent implements OnInit {
 		this.data = response.results;
 	}
 
-	handleDelete($event) {
-		if (!$event.data) return;
-		
-		const data: Customer = $event.data;
-		const id = $event.data.id;
+	handleDelete({ data }) {
+		if (!data) return;
+		const user: Customer = data;
 
-		this.http.delete(`${environment.api}/accounts/customers/${id}`)
+		this.http.delete(`${environment.api}/accounts/customers/${user.id}`)
 			.subscribe(() => this.deleted = true);
 	}
-	
-	handleEdit($event) {
-		if (!$event.data) return;
-		
-		const data: Customer = $event.data;
-		const id = data.id;
 
-		this.http.put(`${environment.api}/accounts/customers/${id}`, data)
+	handleEdit({ data }) {
+		if (!data) return;
+		const user: Customer = data;
+
+		this.http.put(`${environment.api}/accounts/customers/${user.id}`, user)
 			.subscribe(() => this.edited = true);
 	}
 }

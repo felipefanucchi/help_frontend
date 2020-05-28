@@ -36,23 +36,19 @@ export class ListAdminComponent implements OnInit {
 		this.data = response.results;
 	}
 
-	handleDelete($event) {
-		if (!$event.data) return;
-		
-		const data: Admin = $event.data;
-		const id = data.id;
+	handleDelete({ data }) {
+		if (!data) return;
+		const user: Admin = data;
 
-		this.http.delete(`${environment.api}/accounts/admin/${id}`)
+		this.http.delete(`${environment.api}/accounts/admin/${user.id}`)
 			.subscribe(() => this.deleted = true);
 	}
 
-	handleEdit($event) {
-		if (!$event.data) return;
-		
-		const data: Admin = $event.data;
-		const id = data.id;
+	handleEdit({ data }) {
+		if (!data) return;
+		const user: Admin = data;
 
-		this.http.put(`${environment.api}/accounts/admin/${id}`, data)
+		this.http.put(`${environment.api}/accounts/admin/${user.id}`, user)
 			.subscribe(() => this.edited = true);
 	}
 
