@@ -32,7 +32,7 @@ export class AddCustomerComponent {
 
 	handleSubmit(data: Customer): void {
 		this.http.post(`${environment.api}/accounts/customers/`, data)
-			.subscribe(response => {
+			.subscribe(() => {
 				this.finished = true;
 				this.showFormSentToast('top-right', 'success');
 			});

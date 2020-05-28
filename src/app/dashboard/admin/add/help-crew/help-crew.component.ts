@@ -24,7 +24,7 @@ export class AddHelpCrewComponent {
 
 	handleSubmit(data: Help) {
 		this.http.post(`${environment.api}/accounts/help/`, data)
-			.subscribe(response => {
+			.subscribe(() => {
 				this.finished = true;
 				this.showFormSentToast('top-right', 'success');
 			});

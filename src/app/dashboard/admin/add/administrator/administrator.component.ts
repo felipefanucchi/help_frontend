@@ -28,7 +28,7 @@ export class AddAdministratorComponent {
 		})
 
 		this.http.post(`${environment.api}/accounts/admin/`, data)
-			.subscribe(response => {
+			.subscribe(() => {
 				this.finished = true;
 				this.showFormSentToast('top-right', 'success');
 			});
@@ -40,6 +40,6 @@ export class AddAdministratorComponent {
 			status
 		};
 		
-    	this.toastrService.show('Formulário submetido', 'Sucesso', iconConfig);
+		this.toastrService.show('Formulário submetido', 'Sucesso', iconConfig);
 	}
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { ListResponse } from '../../../../interfaces';
-import { Help } from '../../../../models';
+import { Help, Customer } from '../../../../models';
 
 @Component({
 	selector: 'admin-smart-table-customer',
@@ -34,10 +34,10 @@ export class ListCustomerComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.http.get(`${environment.api}/accounts/customers/`)
-			.subscribe((response: ListResponse<Help>) => this.parseResponse(response));
+			.subscribe((response: ListResponse<Customer>) => this.parseResponse(response));
 	}
 
-	private parseResponse(response: ListResponse<Help>) {
+	private parseResponse(response: ListResponse<Customer>) {
 		this.data = response.results;
 	}
 
