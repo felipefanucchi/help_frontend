@@ -10,5 +10,5 @@
 
 export const environment = {
   production: false,
-  api: 'https://help-especialidades.herokuapp.com/api/v1'
+  api: 'http://dev.helpespecialidades.com.br/api/v1'
 };

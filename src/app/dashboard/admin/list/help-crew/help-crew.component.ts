@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
+import { ListResponse } from '../../../../interfaces';
+import { Help } from '../../../../models';
 
 @Component({
 	selector: 'admin-smart-table-help-crew',
@@ -23,11 +25,11 @@ export class ListHelpCrewComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.http.get(`${environment.api}/accounts/admin/`)
-			.subscribe((response) => this.parseResponse(response));
+		this.http.get(`${environment.api}/accounts/help/`)
+			.subscribe((response: ListResponse<Help>) => this.parseResponse(response));
 	}
 
-	private parseResponse(response) {
+	private parseResponse(response: ListResponse<Help>) {
 		this.data = response.results;
 	}
 
@@ -36,7 +38,8 @@ export class ListHelpCrewComponent implements OnInit {
 		
 		const id = $event.data.id;
 
-		this.http.delete(`${environment.api}/accounts/admin/${id}`)
+		this.http.delete(`${environment.api}/accounts/help/${id}`)
 			.subscribe(() => this.deletedEvent = $event);
 	}
 }
+

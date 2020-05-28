@@ -5,4 +5,5 @@
  */
 export const environment = {
   production: true,
+  api: 'http://dev.helpespecialidades.com.br/api/v1'
 };

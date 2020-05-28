@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
+import { ListResponse } from '../../../../interfaces';
+import { Help } from '../../../../models';
 
 @Component({
 	selector: 'admin-smart-table-professional',
@@ -40,10 +42,10 @@ export class ListProfessionalComponent implements OnInit {
 
 	ngOnInit(): void {
 		this.http.get(`${environment.api}/accounts/profesionals/`)
-			.subscribe(response => this.parseResponse(response));
+			.subscribe((response: ListResponse<Help>) => this.parseResponse(response));
 	}
 
-	private parseResponse(response) {
+	private parseResponse(response : ListResponse<Help>) {
 		this.data = response.results;
 	}
 
