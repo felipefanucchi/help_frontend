@@ -12,6 +12,7 @@ import { Professional } from '../../../../models';
 			role="Profissional"
 			[data]="data"
 			(delete)="handleDelete($event)"
+			(edit)="handleEdit($event)"
 			[deleted]="deleted"
 			[edited]="edited"
 		></app-smart-user-table>
@@ -63,7 +64,7 @@ export class ListProfessionalComponent implements OnInit {
 		if (!data) return;
 		const user: Professional = data;
 
-		this.http.put(`${environment.api}/accounts/profesionals/${user.id}`, data)
+		this.http.put(`${environment.api}/accounts/profesionals/${user.id}/`, data)
 			.subscribe(() => this.edited = true);
 	}
 }

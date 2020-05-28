@@ -12,6 +12,7 @@ import { Help, Customer } from '../../../../models';
 			role="Contratante"
 			[data]="data"
 			(delete)="handleDelete($event)"
+			(edit)="handleEdit($event)"
 			[deleted]="deleted"
 			[edited]="edited"
 		></app-smart-user-table>
@@ -55,7 +56,7 @@ export class ListCustomerComponent implements OnInit {
 		if (!data) return;
 		const user: Customer = data;
 
-		this.http.put(`${environment.api}/accounts/customers/${user.id}`, user)
+		this.http.put(`${environment.api}/accounts/customers/${user.id}/`, user)
 			.subscribe(() => this.edited = true);
 	}
 }

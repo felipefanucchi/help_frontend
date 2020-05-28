@@ -12,6 +12,7 @@ import { NbToastrService, NbToastrConfig } from '@nebular/theme';
 			role="Administrador"
 			[data]="data"
 			(delete)="handleDelete($event)"
+			(edit)="handleEdit($event)"
 			[deleted]="deleted"
 			[edited]="edited"
 		></app-smart-user-table>
@@ -48,8 +49,8 @@ export class ListAdminComponent implements OnInit {
 		if (!data) return;
 		const user: Admin = data;
 
-		this.http.put(`${environment.api}/accounts/admin/${user.id}`, user)
-			.subscribe(() => this.edited = true);
+		this.http.put(`${environment.api}/accounts/admin/${user.id}/`, user)
+			.subscribe(response => this.edited = true);
 	}
 
 }

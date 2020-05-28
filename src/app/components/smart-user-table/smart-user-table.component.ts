@@ -25,38 +25,50 @@ export class SmartUserTableComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if(changes.deleted) this.showToastr('Usuário deletado com sucesso', 'top-right', 'warning');
-		if(changes.edited) this.showToastr('Usuário editado com sucesso', 'top-right', 'success');
+		if(changes.deleted?.currentValue) {
+			this.showToastr('Usuário deletado com sucesso', 'top-right', 'warning');
+		}
+		if(changes.edited?.currentValue) {
+			this.showToastr('Usuário editado com sucesso', 'top-right', 'success');
+		}
 	}
 	
-  onDeleteConfirm(event): void {
-		this.handleDeleteEvent(event);
+  async onDeleteConfirm(event) {
+		const userResponse = await this.handleDeleteEvent(event);
+		if (!userResponse) return
+
+		this.delete.emit(event)
 	}
 
-	onEditConfirm(event) {
-		this.handleEditEvent(event);
+	async onEditConfirm(event) {
+		const userResponse = await this.handleEditEvent(event);
+		if (!userResponse) return
+
+		this.edit.emit(event)
 	}
 
-	private handleDeleteEvent(event) {
-		if (!event) return;
-
-		if (event.confirm && window.confirm(`Deseja deletar o ${this.role} atual`)) {
-			event.confirm.resolve();
-			this.delete.emit(event);
-    } else {
-      event.confirm.reject();
-    }
+	private async handleDeleteEvent(event) {
+		return new Promise(async (resolve, reject) => {
+			if (event?.confirm && window.confirm(`Deseja deletar o ${this.role} atual`)) {
+				await event.confirm.resolve();
+				resolve(true);
+			} else {
+				await event.confirm.reject();
+				reject(false);
+			}
+		})
 	}
 
-	private handleEditEvent(event) {
-		if (!event) return;
-
-		if (event.confirm && window.confirm(`Deseja editar o ${this.role} atual`)) {
-      event.confirm.resolve();
-			this.edit.emit(event);
-    } else {
-      event.confirm.reject();
-    }
+	private async handleEditEvent(event) {
+		return new Promise(async (resolve, reject) => {
+			if (event?.confirm && window.confirm(`Deseja editar o ${this.role} atual`)) {
+				await event.confirm.resolve();
+				resolve(true);
+			} else {
+				await event.confirm.reject();
+				reject(false);
+			}
+		})
 	}
 	
 	private buildColumns(data: Object): void {

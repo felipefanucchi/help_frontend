@@ -12,6 +12,7 @@ import { NbToastrService, NbToastrConfig } from '@nebular/theme';
 			role="Equipe Help"
 			[data]="data"
 			(delete)="handleDelete($event)"
+			(edit)="handleEdit($event)"
 			[deleted]="deleted"
 			[edited]="edited"
 		></app-smart-user-table>
@@ -46,7 +47,7 @@ export class ListHelpCrewComponent implements OnInit {
 		if (!data) return;
 		const user: Help = data;
 
-		this.http.put(`${environment.api}/accounts/help/${user.id}`, user)
+		this.http.put(`${environment.api}/accounts/help/${user.id}/`, user)
 			.subscribe(() => this.edited = true);
 	}
 }
