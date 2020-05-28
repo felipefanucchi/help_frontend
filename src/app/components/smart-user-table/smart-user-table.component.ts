@@ -12,6 +12,7 @@ export class SmartUserTableComponent implements OnInit, OnChanges {
 	@Input() columns: Array<any>;
 	@Input() role: string;
 	@Input() data: Array<any>;
+	@Input() deleted: boolean;
 	@Output() delete: EventEmitter<any> = new EventEmitter<any>();
 	@Output() edit: EventEmitter<any> = new EventEmitter<any>();
 
@@ -24,7 +25,7 @@ export class SmartUserTableComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if(changes.deleted) this.showToastr();
+		if(changes.deleted) this.showToastr('Usuário deletado com sucesso', 'top-right', 'success');
 	}
 	
   onDeleteConfirm(event): void {
@@ -128,12 +129,12 @@ export class SmartUserTableComponent implements OnInit, OnChanges {
 		};
 	}
 
-	private showToastr() {
+	private showToastr(message: string, position: string, status: string) {
 		const iconConfig = {
-			position: 'top-right',
-			status: 'success'
+			position,
+			status
 		};
 
-		this.toastrService.show(null, 'Usuário deletado com sucesso', iconConfig as NbToastrConfig);
+		this.toastrService.show(null, message, iconConfig as NbToastrConfig);
 	}
 }

@@ -12,7 +12,7 @@ import { Professional } from '../../../../models';
 			role="Profissional"
 			[data]="data"
 			(delete)="handleDelete($event)"
-			[deleted_event]="deletedEvent"
+			[deleted]="deleted"
 		></app-smart-user-table>
 	`
 })
@@ -34,7 +34,7 @@ export class ListProfessionalComponent implements OnInit {
 	};
 
 	data: Array<any>;
-	deletedEvent: any;
+	deleted = true;
 
 	constructor(
 		private http: HttpClient
@@ -55,6 +55,6 @@ export class ListProfessionalComponent implements OnInit {
 		const id = $event.data.id;
 
 		this.http.delete(`${environment.api}/accounts/profesionals/${id}`)
-			.subscribe(() => this.deletedEvent = $event);
+			.subscribe(() => this.deleted = true);
 	}
 }

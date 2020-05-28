@@ -12,7 +12,7 @@ import { Help, Customer } from '../../../../models';
 			role="Contratante"
 			[data]="data"
 			(delete)="handleDelete($event)"
-			[deleted_event]="deletedEvent"
+			[deleted]="deleted"
 		></app-smart-user-table>
 	`
 })
@@ -26,7 +26,7 @@ export class ListCustomerComponent implements OnInit {
 	};
 
 	data: Array<any>;
-	deletedEvent: any;
+	deleted: boolean;
 
 	constructor(
 		private http: HttpClient
@@ -47,6 +47,6 @@ export class ListCustomerComponent implements OnInit {
 		const id = $event.data.id;
 
 		this.http.delete(`${environment.api}/accounts/customers/${id}`)
-			.subscribe(() => this.deletedEvent = $event);
+			.subscribe(() => this.deleted = true);
 	}
 }
