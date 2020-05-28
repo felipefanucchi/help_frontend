@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
-import { LocalDataSource } from 'ng2-smart-table';
-import { SmartTableData } from '../../@core/data/smart-table';
 import { NbToastrConfig, NbToastrService } from '@nebular/theme';
 
 @Component({
@@ -13,6 +11,8 @@ export class SmartUserTableComponent implements OnInit, OnChanges {
 	@Input() role: string;
 	@Input() data: Array<any>;
 	@Input() deleted: boolean;
+	@Input() edited: boolean;
+
 	@Output() delete: EventEmitter<any> = new EventEmitter<any>();
 	@Output() edit: EventEmitter<any> = new EventEmitter<any>();
 
@@ -25,7 +25,8 @@ export class SmartUserTableComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if(changes.deleted) this.showToastr('Usuário deletado com sucesso', 'top-right', 'success');
+		if(changes.deleted) this.showToastr('Usuário deletado com sucesso', 'top-right', 'warning');
+		if(changes.edited) this.showToastr('Usuário editado com sucesso', 'top-right', 'success');
 	}
 	
   onDeleteConfirm(event): void {

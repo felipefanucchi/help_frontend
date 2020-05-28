@@ -13,6 +13,7 @@ import { NbToastrService, NbToastrConfig } from '@nebular/theme';
 			[data]="data"
 			(delete)="handleDelete($event)"
 			[deleted]="deleted"
+			[edited]="edited"
 		></app-smart-user-table>
 	`
 })
@@ -20,6 +21,7 @@ import { NbToastrService, NbToastrConfig } from '@nebular/theme';
 export class ListAdminComponent implements OnInit {
 	data: Array<any>;
 	deleted: boolean;
+	edited: boolean;
 
 	constructor(
 		private http: HttpClient,
@@ -42,6 +44,16 @@ export class ListAdminComponent implements OnInit {
 
 		this.http.delete(`${environment.api}/accounts/admin/${id}`)
 			.subscribe(() => this.deleted = true);
+	}
+
+	handleEdit($event) {
+		if (!$event.data) return;
+		
+		const data: Admin = $event.data;
+		const id = data.id;
+
+		this.http.put(`${environment.api}/accounts/admin/${id}`, data)
+			.subscribe(() => this.edited = true);
 	}
 
 }

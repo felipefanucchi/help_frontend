@@ -13,6 +13,7 @@ import { Help, Customer } from '../../../../models';
 			[data]="data"
 			(delete)="handleDelete($event)"
 			[deleted]="deleted"
+			[edited]="edited"
 		></app-smart-user-table>
 	`
 })
@@ -27,6 +28,7 @@ export class ListCustomerComponent implements OnInit {
 
 	data: Array<any>;
 	deleted: boolean;
+	edited: boolean;
 
 	constructor(
 		private http: HttpClient
@@ -44,9 +46,20 @@ export class ListCustomerComponent implements OnInit {
 	handleDelete($event) {
 		if (!$event.data) return;
 		
+		const data: Customer = $event.data;
 		const id = $event.data.id;
 
 		this.http.delete(`${environment.api}/accounts/customers/${id}`)
 			.subscribe(() => this.deleted = true);
+	}
+	
+	handleEdit($event) {
+		if (!$event.data) return;
+		
+		const data: Customer = $event.data;
+		const id = data.id;
+
+		this.http.put(`${environment.api}/accounts/customers/${id}`, data)
+			.subscribe(() => this.edited = true);
 	}
 }
