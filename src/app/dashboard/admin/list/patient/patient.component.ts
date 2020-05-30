@@ -20,7 +20,7 @@ import { Patient } from '../../../../models';
 })
 
 export class ListPatientComponent implements OnInit {
-    columns = {
+	columns = {
 		document_number: {
 			title: 'Documento',
 			type: 'string',
@@ -28,8 +28,8 @@ export class ListPatientComponent implements OnInit {
 		name: {
 			title: 'Nome',
 			type: 'string',
-        },
-        postal_code: {
+		},
+		postal_code: {
 			title: 'CEP',
 			type: 'number',
 		},
@@ -40,8 +40,8 @@ export class ListPatientComponent implements OnInit {
 		neighborhood: {
 			title: 'Bairro',
 			type: 'string',
-        },
-        city: {
+		},
+		city: {
 			title: 'Cidade',
 			type: 'string',
 		},
@@ -52,18 +52,18 @@ export class ListPatientComponent implements OnInit {
 		phones: {
 			title: 'Telefone(s)',
 			type: 'string',
-        },
-        birthday: {
-            title: 'Nascimento',
-            type: 'string',
-        }
-    };
+		},
+		birthday: {
+			title: 'Nascimento',
+			type: 'string',
+		}
+	};
 
 	data: Array<any>;
 	deleted: boolean;
-    edited: boolean;    
+	edited: boolean;
 
-	constructor(private http: HttpClient) {}
+	constructor(private http: HttpClient) { }
 
 	ngOnInit(): void {
 		this.http.get(`${environment.api}/cares/patients/`)
@@ -71,7 +71,7 @@ export class ListPatientComponent implements OnInit {
 	}
 
 	private parseResponse(response: ListResponse<Patient>) {
-        this.data = response.results;
+		this.data = response.results;
 	}
 
 	handleDelete({ data }) {
@@ -81,7 +81,7 @@ export class ListPatientComponent implements OnInit {
 		this.http.delete(`${environment.api}/cares/patients/${patient.id}`)
 			.subscribe(() => this.deleted = true);
 	}
-	
+
 	handleEdit({ data }) {
 		if (!data) return;
 		const patient: Patient = data;
