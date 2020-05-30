@@ -7,8 +7,8 @@ import { Help } from '../../../../models';
 @Component({
 	selector: 'admin-smart-listing-table-patient',
 	template: `
-        <app-smart-listing-table
-            [columns]="columns"
+		<app-smart-listing-table
+			[columns]="columns"
 			objectName="Paciente"
 			[data]="data"
 			(delete)="handleDelete($event)"
