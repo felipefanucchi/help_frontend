@@ -4,7 +4,7 @@ const basePath = '/dashboard/admin';
 
 export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     {
-      title: 'Posições',
+      title: 'Usuários',
       group: true,
     },
     {
@@ -62,6 +62,10 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
           link: `${basePath}/lista/contratante`
         }
       ]
+    },
+    {
+      title: 'Operação',
+      group: true,
     },
     {
       title: 'Pacientes',
