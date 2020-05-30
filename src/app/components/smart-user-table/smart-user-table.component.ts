@@ -16,9 +16,9 @@ export class SmartUserTableComponent implements OnInit, OnChanges {
 	@Output() delete: EventEmitter<any> = new EventEmitter<any>();
 	@Output() edit: EventEmitter<any> = new EventEmitter<any>();
 
-  settings: any;
+  	settings: any;
 
-  constructor(private toastrService: NbToastrService) {}
+  	constructor(private toastrService: NbToastrService) {}
 	
 	ngOnInit(): void {
 		this.buildColumns(this.columns);
@@ -33,7 +33,7 @@ export class SmartUserTableComponent implements OnInit, OnChanges {
 		}
 	}
 	
-  async onDeleteConfirm(event) {
+  	async onDeleteConfirm(event) {
 		const userResponse = await this.handleDeleteEvent(event);
 		if (!userResponse) return
 
@@ -75,7 +75,8 @@ export class SmartUserTableComponent implements OnInit, OnChanges {
 		const columns = {
 			id: {
 				title: 'ID',
-				type: 'number'
+				type: 'number',
+				editable: false,
 			},
 			name: {
 				title: 'Nome Completo',
