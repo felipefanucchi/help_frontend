@@ -7,15 +7,15 @@ import { Help, Customer } from '../../../../models';
 @Component({
 	selector: 'admin-smart-table-customer',
 	template: `
-		<app-smart-user-table
+		<app-smart-listing-table
 			[columns]="columns"
-			role="Contratante"
+			name="Contratante"
 			[data]="data"
 			(delete)="handleDelete($event)"
 			(edit)="handleEdit($event)"
 			[deleted]="deleted"
 			[edited]="edited"
-		></app-smart-user-table>
+		></app-smart-listing-table>
 	`
 })
 

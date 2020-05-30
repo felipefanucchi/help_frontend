@@ -8,7 +8,7 @@ import { NbToastrConfig, NbToastrService } from '@nebular/theme';
 
 export class SmartListingTableComponent implements OnInit, OnChanges {
 	@Input() columns: Array<any>;
-	@Input() objectName: string;
+	@Input('name') objectName: string;
 	@Input() data: Array<any>;
 	@Input() deleted: boolean;
 	@Input() edited: boolean;

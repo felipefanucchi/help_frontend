@@ -7,15 +7,15 @@ import { Professional } from '../../../../models';
 @Component({
 	selector: 'admin-smart-table-professional',
 	template: `
-		<app-smart-user-table
+		<app-smart-listing-table
 			[columns]="columns"
-			role="Profissional"
+			name="Profissional"
 			[data]="data"
 			(delete)="handleDelete($event)"
 			(edit)="handleEdit($event)"
 			[deleted]="deleted"
 			[edited]="edited"
-		></app-smart-user-table>
+		></app-smart-listing-table>
 	`
 })
 

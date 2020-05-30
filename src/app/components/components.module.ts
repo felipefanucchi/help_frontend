@@ -4,7 +4,6 @@ import { NbInputModule, NbCardModule, NbButtonModule, NbCheckboxModule, NbSelect
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Components
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
-import { SmartUserTableComponent } from './smart-user-table/smart-user-table.component';
 import { SmartListingTableComponent } from './smart-listing-table/smart-listing-table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 @NgModule({
@@ -23,12 +22,10 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 	],
 	declarations: [
 		CreateUserFormComponent,
-		SmartUserTableComponent,
 		SmartListingTableComponent,
 	],
 	exports: [
 		CreateUserFormComponent,
-		SmartUserTableComponent,
 		SmartListingTableComponent,
 	]
 })

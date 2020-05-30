@@ -8,14 +8,14 @@ import { NbToastrService, NbToastrConfig } from '@nebular/theme';
 @Component({
 	selector: 'admin-smart-table-help-crew',
 	template: `
-		<app-smart-user-table
-			role="Equipe Help"
+		<app-smart-listing-table
+			name="Equipe Help"
 			[data]="data"
 			(delete)="handleDelete($event)"
 			(edit)="handleEdit($event)"
 			[deleted]="deleted"
 			[edited]="edited"
-		></app-smart-user-table>
+		></app-smart-listing-table>
 	`
 })
 

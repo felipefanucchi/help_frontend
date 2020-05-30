@@ -9,7 +9,7 @@ import { Patient } from '../../../../models';
 	template: `
 		<app-smart-listing-table
 			[columns]="columns"
-			objectName="Paciente"
+			name="Paciente"
 			[data]="data"
 			(delete)="handleDelete($event)"
 			(edit)="handleEdit($event)"
