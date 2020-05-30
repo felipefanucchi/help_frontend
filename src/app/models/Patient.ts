@@ -7,5 +7,6 @@ export class Patient {
 	city: string;
 	state: string;
     phones: string;
-    birthday: string;
+	birthday: string;
+	document_number: string;
 }
