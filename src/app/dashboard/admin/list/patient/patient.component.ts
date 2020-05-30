@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { ListResponse } from '../../../../interfaces';
-import { Help } from '../../../../models';
+import { Patient } from '../../../../models';
 
 @Component({
 	selector: 'admin-smart-listing-table-patient',
@@ -20,46 +20,42 @@ import { Help } from '../../../../models';
 })
 
 export class ListPatientComponent implements OnInit {
-    columns: {
-        id: {
-			title: 'ID',
-			type: 'number'
-		},
+    columns = {
 		document_number: {
 			title: 'Documento',
-			type: 'string'
+			type: 'string',
 		},
 		name: {
 			title: 'Nome',
-			type: 'string'
+			type: 'string',
         },
         postal_code: {
 			title: 'CEP',
-			type: 'number'
+			type: 'number',
 		},
 		address: {
 			title: 'Endereço',
-			type: 'string'
+			type: 'string',
 		},
 		neighborhood: {
 			title: 'Bairro',
-			type: 'string'
+			type: 'string',
         },
         city: {
 			title: 'Cidade',
-			type: 'string'
+			type: 'string',
 		},
 		state: {
 			title: 'Estado',
-			type: 'string'
+			type: 'string',
 		},
 		phones: {
 			title: 'Telefone(s)',
-			type: 'string'
+			type: 'string',
         },
         birthday: {
             title: 'Nascimento',
-            type: 'string'
+            type: 'string',
         }
     };
 
@@ -86,26 +82,26 @@ export class ListPatientComponent implements OnInit {
             }
         ];
 		// this.http.get(`${environment.api}/cares/patients/`)
-		// 	.subscribe((response: ListResponse<Help>) => this.parseResponse(response));
+		// 	.subscribe((response: ListResponse<Patient>) => this.parseResponse(response));
 	}
 
-	private parseResponse(response: ListResponse<Help>) {
+	private parseResponse(response: ListResponse<Patient>) {
         this.data = response.results;
 	}
 
 	handleDelete({ data }) {
 		if (!data) return;
-		const user: Help = data;
+		const patient: Patient = data;
 
-		this.http.delete(`${environment.api}/cares/patients/${user.id}`)
+		this.http.delete(`${environment.api}/cares/patients/${patient.id}`)
 			.subscribe(() => this.deleted = true);
 	}
 	
 	handleEdit({ data }) {
 		if (!data) return;
-		const user: Help = data;
+		const patient: Patient = data;
 
-		this.http.put(`${environment.api}/cares/patients/${user.id}/`, user)
+		this.http.put(`${environment.api}/cares/patients/${patient.id}/`, patient)
 			.subscribe(() => this.edited = true);
 	}
 }

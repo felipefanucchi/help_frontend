@@ -90,6 +90,14 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 	}
 	
 	private buildColumns(data: Object): void {
+        const columns = {
+            id: {
+                title: 'ID',
+                type: 'number',
+                editable: false,
+            }
+        };
+
 		this.settings = {
 			actions: {
 				add: false,
@@ -105,7 +113,7 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 				deleteButtonContent: '<i class="nb-trash"></i>',
 				confirmDelete: true,
 			},
-			columns: data
+			columns: Object.assign(columns, data)
 		};
 	}
 
