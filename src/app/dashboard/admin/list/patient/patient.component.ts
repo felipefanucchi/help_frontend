@@ -66,23 +66,8 @@ export class ListPatientComponent implements OnInit {
 	constructor(private http: HttpClient) {}
 
 	ngOnInit(): void {
-        // mock return until api works
-        this.data = [
-            {
-                "id": 0,
-                "document_number": "string",
-                "name": "string",
-                "postal_code": "string",
-                "address": "string",
-                "neighborhood": "string",
-                "city": "string",
-                "state": "string",
-                "phones": "string",
-                "birthday": "2020-05-30"
-            }
-        ];
-		// this.http.get(`${environment.api}/cares/patients/`)
-		// 	.subscribe((response: ListResponse<Patient>) => this.parseResponse(response));
+		this.http.get(`${environment.api}/cares/patients/`)
+			.subscribe((response: ListResponse<Patient>) => this.parseResponse(response));
 	}
 
 	private parseResponse(response: ListResponse<Patient>) {
