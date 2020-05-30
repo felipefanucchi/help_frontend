@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //Components
 import { CreateUserFormComponent } from './create-user-form/create-user-form.component';
 import { SmartUserTableComponent } from './smart-user-table/smart-user-table.component';
+import { SmartListingTableComponent } from './smart-listing-table/smart-listing-table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 @NgModule({
 	imports: [
@@ -18,15 +19,17 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 		FormsModule,
 		ReactiveFormsModule,
 		NbRadioModule,
-    Ng2SmartTableModule,
+		Ng2SmartTableModule,
 	],
 	declarations: [
 		CreateUserFormComponent,
-		SmartUserTableComponent
+		SmartUserTableComponent,
+		SmartListingTableComponent,
 	],
 	exports: [
 		CreateUserFormComponent,
-		SmartUserTableComponent
+		SmartUserTableComponent,
+		SmartListingTableComponent,
 	]
 })
 export class ComponentsModule { }

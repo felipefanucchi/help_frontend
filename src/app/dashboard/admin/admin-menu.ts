@@ -63,4 +63,18 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
         }
       ]
     },
+    {
+      title: 'Pacientes',
+      icon: 'people-outline',
+      children: [
+        {
+          title: 'Adicionar novo',
+          link: `${basePath}/adicionar/paciente`
+        },
+        {
+          title: 'Ver todos',
+          link: `${basePath}/lista/paciente`
+        }
+      ]
+    },
   ];
