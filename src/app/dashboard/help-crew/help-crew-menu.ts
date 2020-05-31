@@ -48,5 +48,19 @@ export const HELP_MENU_ITEMS: NbMenuItem[] = [
           link: `${basePath}/lista/paciente`
         }
       ]
+		},
+		{
+      title: 'Tratamentos',
+      icon: 'activity-outline',
+      children: [
+        {
+          title: 'Adicionar novo',
+          link: `${basePath}/adicionar/tratamento`
+        },
+        {
+          title: 'Ver todos',
+          link: `${basePath}/lista/tratamento`
+        }
+      ]
     },
   ];

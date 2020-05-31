@@ -11,7 +11,7 @@ import { ListResponse } from '../../../../interfaces';
 	selector: 'admin-add-patient',
 	templateUrl: './care.component.html'
 })
-export class AddCareComponent implements OnInit {
+export class HelpCrewAddCareComponent implements OnInit {
 	finished: boolean;
 	customersCount: number;
 	customersPage: number | null = 1;

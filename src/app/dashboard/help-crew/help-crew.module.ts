@@ -7,6 +7,7 @@ import { HelpCrewListCustomerComponent } from './list/customer/customer.componen
 import { HelpCrewListProfessionalComponent } from './list/professional/professional.component';
 import { HelpCrewListPatientComponent } from './list/patient/patient.component';
 import { HelpCrewAddPatientComponent } from './add/patient/patient.component';
+import { HelpCrewAddCareComponent } from './add/care/care.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { HelpCrewAddPatientComponent } from './add/patient/patient.component';
 		HelpCrewAddProfessionalComponent,
 		HelpCrewAddCustomerComponent,
 		HelpCrewAddPatientComponent,
+		HelpCrewAddCareComponent,
 		HelpCrewListCustomerComponent,
 		HelpCrewListProfessionalComponent,
 		HelpCrewListPatientComponent
