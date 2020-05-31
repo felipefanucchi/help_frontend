@@ -8,6 +8,7 @@ import { Patient } from '../../../../models';
 	selector: 'admin-smart-listing-table-patient',
 	template: `
 		<app-smart-listing-table
+			[columns]="columns"
 			name="Paciente"
 			[data]="data"
 			[deleted]="deleted"
@@ -20,6 +21,13 @@ import { Patient } from '../../../../models';
 })
 
 export class ListPatientComponent implements OnInit {
+	columns = {
+		phones: {
+			title: 'Telefones',
+			type: 'string'
+		},
+	};
+
 	data: Array<any>;
 	deleted: boolean;
 	edited: boolean;

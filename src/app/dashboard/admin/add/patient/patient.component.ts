@@ -9,13 +9,21 @@ import { NbToastrService } from '@nebular/theme';
 	template: `
 	<app-create 
 		name="Paciente" 
-		[custom_fields]="[]"
+		[custom_fields]="fields"
 		[hide_fields]="[ 'email', 'address_complement', 'address_number' ]"
 		[finished]="finished"
 		(event_submitted)="handleSubmit($event)"
 	></app-create>`
 })
 export class AddPatientComponent {
+	fields = [
+		{
+			type: 'text',
+			label: 'Telefones',
+			placeholder: '',
+			name: 'phones',
+		}
+	];
 	finished: boolean;
 
 	constructor(
