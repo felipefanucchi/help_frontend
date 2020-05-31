@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, AfterViewInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl, FormArray } from '@angular/forms';
 import { NbToastrService } from '@nebular/theme';
 import { resolve } from 'dns';
@@ -8,9 +8,10 @@ import { resolve } from 'dns';
 	templateUrl: './create-form.component.html',
 	styleUrls: ['./create-form.component.scss']
 })
-export class CreateFormComponent implements OnInit, OnChanges {
+export class CreateFormComponent implements AfterViewInit, OnChanges {
 	@Input('custom_fields') customFields: [];
 	@Input('hide_fields') fieldsToHide: [];
+	@Input('first_header_title') firstHeaderTitle: string;
 	@Input('finished') finished: boolean;
 	@Input() name: string;
 	@Output('event_submitted') submitted: EventEmitter<any> = new EventEmitter<any>();
@@ -36,7 +37,7 @@ export class CreateFormComponent implements OnInit, OnChanges {
 		});
 	}
 
-	ngOnInit(): void {
+	ngAfterViewInit(): void {
 		(async () => {
 			await this.buildCustomFields();
 			this.removeFields();
@@ -44,6 +45,9 @@ export class CreateFormComponent implements OnInit, OnChanges {
 	}
 
 	ngOnChanges(change): void {
+		console.log(change);
+		this.buildCustomFields();
+
 		if (!this.finished) return;
 		this.formGroup.reset();
 		this.wasSubmitted = false;
@@ -95,6 +99,7 @@ export class CreateFormComponent implements OnInit, OnChanges {
 	
 	private buildCustomFields(): Promise<boolean> {
 		if (!this.customFields?.length) return;
+
 
 		return new Promise(resolve => {
 			this.customFields.forEach((field: any, index: number) => {

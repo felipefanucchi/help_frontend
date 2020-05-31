@@ -1,7 +1,7 @@
 <h4>Cadastrar novo {{name}}</h4>
 <form *ngIf="formGroup" [formGroup]="formGroup" (submit)="handleSubmit($event)">
 	<nb-card>
-		<nb-card-header>Dados Pessoais</nb-card-header>
+		<nb-card-header>{{ firstHeaderTitle ? firstHeaderTitle : 'Dados Pessoais' }}</nb-card-header>
 		<nb-card-body>
 			<div class="row">
 				<div class="col" *ngIf="!fieldsToHide?.includes('name')">
@@ -197,36 +197,59 @@
 		</nb-card-body>
 	</nb-card>
 	<nb-card *ngIf="customFields.length">
-		<nb-card-header>Dados do {{ role }}</nb-card-header>
+		<nb-card-header>Dados do {{ name }}</nb-card-header>
 		<nb-card-body>
 			<div class="row">
 				<ng-container *ngFor="let field of customFields">
-					<div class="form-group {{ customFields.length === 1 ? 'col-md-12' : 'col' }}">
+					<div class="form-group {{ customFields.length === 1 ? 'col-md-12' : 'col-md-4' }}">
 						<ng-container [ngSwitch]="field?.type">
 							<ng-container *ngSwitchCase="'radio'">
-								<label for="field?.name" class="label">{{ field?.label }}</label>
-								<nb-radio-group [formControlName]="field?.name">
-									<nb-radio 
+								<ng-container>
+									<label for="field?.name" class="label">{{ field?.label }}</label>
+									<nb-radio-group [formControlName]="field?.name">
+										<nb-radio 
+											[ngClass]="{ 
+												'status-danger': formGroup.get(field?.name)?.invalid && wasSubmitted 
+											}" 
+											*ngFor="let radio of field?.options" 
+											[value]="radio?.value">
+											{{radio?.label}}
+										</nb-radio>
+									</nb-radio-group>
+								</ng-container>
+							</ng-container>
+							<ng-container *ngSwitchCase="'select'">
+								<ng-container>
+									<label for="field?.name" class="label w-100">{{ field?.label }}</label>
+									<nb-select
+										[formControlName]="field?.name"
+										class="w-100"
+										[ngClass]="{ 
+											'status-danger': formGroup.get(field?.name)?.invalid && wasSubmitted 
+										}">
+										<nb-option 
+											*ngFor="let option of field?.options" 
+											[value]="option?.id">
+											{{option?.name}}
+										</nb-option>
+										<nb-option *ngIf="!field?.options?.length" disabled>
+											Não há {{field?.name}} disponível
+										</nb-option>
+									</nb-select>
+								</ng-container>
+							</ng-container>
+							<ng-container *ngSwitchDefault>
+								<ng-container>
+									<label for="field?.name" class="label">{{ field?.label }}</label>
+									<input 
 										[ngClass]="{ 
 											'status-danger': formGroup.get(field?.name)?.invalid && wasSubmitted 
 										}" 
-										*ngFor="let radio of field?.options" 
-										[value]="radio?.value">
-										{{radio?.label}}
-									</nb-radio>
-								</nb-radio-group>
-							</ng-container>
-							<ng-container *ngSwitchDefault>
-								<label for="field?.name" class="label">{{ field?.label }}</label>
-								<input 
-									[ngClass]="{ 
-										'status-danger': formGroup.get(field?.name)?.invalid && wasSubmitted 
-									}" 
-									[formControlName]="field?.name" type="text" 
-									nbInput fullWidth 
-									[id]="field?.name" 
-									[placeholder]="field?.placeholder"
-								>
+										[formControlName]="field?.name" type="text" 
+										nbInput fullWidth 
+										[id]="field?.name" 
+										[placeholder]="field?.placeholder">
+								</ng-container>
 							</ng-container>
 						</ng-container>
 					</div>
