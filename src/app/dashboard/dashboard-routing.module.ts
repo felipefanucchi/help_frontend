@@ -29,6 +29,15 @@ const routes: Routes = [{
       }
     },
     {
+      path: 'contratante',
+      loadChildren: () => import('./customer/customer.module')
+        .then(m => m.CustomerModule),
+      canActivate: [AuthGuard],
+      data: {
+        roles: [Role.Customer]
+      }
+    },
+    {
       path: '',
       redirectTo: '',
       pathMatch: 'full',

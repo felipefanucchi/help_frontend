@@ -8,7 +8,7 @@ import { Observable, PartialObserver } from 'rxjs';
 import { ListResponse } from '../../../../interfaces';
 
 @Component({
-	selector: 'admin-add-patient',
+	selector: 'admin-add-care',
 	templateUrl: './care.component.html'
 })
 export class AddCareComponent implements OnInit {
