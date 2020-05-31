@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { NbToastrConfig, NbToastrService } from '@nebular/theme';
+import { States } from '../../helpers';
 
 @Component({
 	selector: 'app-smart-listing-table',
@@ -139,7 +140,13 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 			},
 			state: {
 				title: 'Estado',
-				type: 'string'
+				type: 'string',
+				editor: {
+					type: 'list',
+					config: {
+						list: States.getList()
+					}
+				}
 			},
 		};
 

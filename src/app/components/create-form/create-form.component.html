@@ -188,8 +188,8 @@
 							}"
 							>
 							<nb-option value="" disabled>Selecione um estado</nb-option>
-							<nb-option *ngFor="let state of states" [value]="state.id">
-							  {{state.name}}
+							<nb-option *ngFor="let state of states" [value]="state.value">
+							  {{state.title}}
 							</nb-option>
 						</nb-select>
 					</div>
