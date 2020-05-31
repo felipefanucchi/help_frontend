@@ -5,7 +5,7 @@ import { environment } from '../../../../../environments/environment';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
-	selector: 'admin-add-customer',
+	selector: 'help-crew-add-customer',
 	template: `
 	<app-create 
 		[custom_fields]="fields" 
@@ -14,7 +14,7 @@ import { NbToastrService } from '@nebular/theme';
 		[finished]="finished"
 	></app-create>`
 })
-export class AddCustomerComponent {
+export class HelpCrewAddCustomerComponent {
 	fields = [
 		{
 			type: 'text',

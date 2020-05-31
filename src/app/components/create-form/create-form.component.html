@@ -1,10 +1,10 @@
-<h4>Cadastrar novo {{role}}</h4>
+<h4>Cadastrar novo {{name}}</h4>
 <form *ngIf="formGroup" [formGroup]="formGroup" (submit)="handleSubmit($event)">
 	<nb-card>
 		<nb-card-header>Dados Pessoais</nb-card-header>
 		<nb-card-body>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col" *ngIf="!fieldsToHide?.includes('name')">
 					<div class="form-group">
 						<label for="name" class="label">Nome</label>
 						<input 
@@ -20,10 +20,10 @@
 						>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col" *ngIf="!fieldsToHide?.includes('email')">
 					<div class="form-group">
 						<label for="email" class="label">Email</label>
-						<input 
+						<input
 							[ngClass]="{ 
 								'status-danger': formGroup.get('email')?.invalid && wasSubmitted 
 							}" 
@@ -38,7 +38,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col" *ngIf="!fieldsToHide?.includes('document_number')">
 					<div class="form-group">
 						<label for="document_number" class="label">CPF</label>
 						<input 
@@ -54,7 +54,7 @@
 						>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col" *ngIf="!fieldsToHide?.includes('birthdate')">
 					<div class="form-group">
 						<label for="birthdate" class="label">Data de nascimento</label>
 						<input 
@@ -77,7 +77,7 @@
 		<nb-card-header>Endereço</nb-card-header>
 		<nb-card-body>
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col" *ngIf="!fieldsToHide?.includes('address')">
 					<div class="form-group">
 						<label for="address" class="label">Logradouro</label>
 						<input 
@@ -93,7 +93,7 @@
 						>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col" *ngIf="!fieldsToHide?.includes('address_number')">
 					<div class="form-group">
 						<label for="address_number" class="label">Número</label>
 						<input 
@@ -109,7 +109,7 @@
 						>
 					</div>
 				</div>
-				<div class="col-md-4">
+				<div class="col" *ngIf="!fieldsToHide?.includes('address_complement')">
 					<div class="form-group">
 						<label for="address_complement" class="label">Complemento</label>
 						<input 
@@ -127,7 +127,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col" *ngIf="!fieldsToHide?.includes('postal_code')">
 					<div class="form-group">
 						<label for="postal_code" class="label">Código Postal (CEP)</label>
 						<input 
@@ -143,7 +143,7 @@
 						>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col" *ngIf="!fieldsToHide?.includes('neighborhood')">
 					<div class="form-group">
 						<label for="neighborhood" class="label">Bairro</label>
 						<input 
@@ -161,7 +161,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col" *ngIf="!fieldsToHide?.includes('city')">
 					<div class="form-group">
 						<label for="city" class="label">Cidade</label>
 						<input 
@@ -177,7 +177,7 @@
 						>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col" *ngIf="!fieldsToHide?.includes('state')">
 					<div class="form-group">
 						<label for="state" class="label">Estado</label>
 						<input 
@@ -201,7 +201,7 @@
 		<nb-card-body>
 			<div class="row">
 				<ng-container *ngFor="let field of customFields">
-					<div class="form-group {{ customFields.length === 1 ? 'col-md-12' : 'col-md-6' }}">
+					<div class="form-group {{ customFields.length === 1 ? 'col-md-12' : 'col' }}">
 						<ng-container [ngSwitch]="field?.type">
 							<ng-container *ngSwitchCase="'radio'">
 								<label for="field?.name" class="label">{{ field?.label }}</label>

@@ -5,7 +5,7 @@ import { ListResponse } from '../../../../interfaces';
 import { Professional } from '../../../../models';
 
 @Component({
-	selector: 'admin-smart-table-professional',
+	selector: 'help-crew-smart-table-professional',
 	template: `
 		<app-smart-listing-table
 			name="Profissional"
@@ -19,7 +19,7 @@ import { Professional } from '../../../../models';
 	`
 })
 
-export class ListProfessionalComponent implements OnInit {
+export class HelpCrewListProfessionalComponent implements OnInit {
 	columns = {
 		register_code: {
 			title: 'Código de Registro',

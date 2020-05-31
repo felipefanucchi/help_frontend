@@ -7,12 +7,12 @@ import { NbToastrService } from '@nebular/theme';
 @Component({
 	selector: 'admin-add-administrator',
 	template: `
-	<app-create-user 
+	<app-create 
 		[custom_fields]="[]" 
-		role="Administrador" 
+		name="Administrador" 
 		(event_submitted)="handleSubmit($event)"
 		[finished]="finished"
-	></app-create-user>`
+	></app-create>`
 })
 export class AddAdministratorComponent {
 	finished: boolean;

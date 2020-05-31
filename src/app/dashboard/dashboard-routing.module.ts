@@ -20,6 +20,15 @@ const routes: Routes = [{
       }
     },
     {
+      path: 'help',
+      loadChildren: () => import('./help-crew/help-crew.module')
+        .then(m => m.HelpCrewModule),
+      canActivate: [AuthGuard],
+      data: {
+        roles: [Role.Help]
+      }
+    },
+    {
       path: '',
       redirectTo: '',
       pathMatch: 'full',

@@ -1,18 +1,18 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from "@angular/core";
-import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
-import { NbToastrService, NbIconConfig } from '@nebular/theme';
-import { Control } from 'leaflet';
+import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl, FormArray } from '@angular/forms';
+import { NbToastrService } from '@nebular/theme';
+import { resolve } from 'dns';
 
 @Component({
-	selector: 'app-create-user',
-	templateUrl: './create-user-form.component.html',
-	styleUrls: ['./create-user-form.component.scss']
+	selector: 'app-create',
+	templateUrl: './create-form.component.html',
+	styleUrls: ['./create-form.component.scss']
 })
-export class CreateUserFormComponent implements OnInit, OnChanges {
+export class CreateFormComponent implements OnInit, OnChanges {
 	@Input('custom_fields') customFields: [];
+	@Input('hide_fields') fieldsToHide: [];
 	@Input('finished') finished: boolean;
-	@Input() role: string;
+	@Input() name: string;
 	@Output('event_submitted') submitted: EventEmitter<any> = new EventEmitter<any>();
 	formGroup: FormGroup;
 	wasSubmitted: boolean
@@ -37,12 +37,10 @@ export class CreateUserFormComponent implements OnInit, OnChanges {
 	}
 
 	ngOnInit(): void {
-		this.customFields.forEach((field: any) => {
-			this.formGroup.addControl(
-				field.name, 
-				new FormControl(null, Validators.required)
-			);
-		});
+		(async () => {
+			await this.buildCustomFields();
+			this.removeFields();
+		})();
 	}
 
 	ngOnChanges(change): void {
@@ -51,7 +49,7 @@ export class CreateUserFormComponent implements OnInit, OnChanges {
 		this.wasSubmitted = false;
 	}
 
-	private handleSubmit($event): void {
+	handleSubmit($event): void {
 		$event.preventDefault();
 		this.wasSubmitted = true;
 
@@ -81,5 +79,34 @@ export class CreateUserFormComponent implements OnInit, OnChanges {
 		};
 		
     this.toastrService.show('valide os campos do formulário', 'Erro', iconConfig);
-  }
+	}
+	
+	private removeFields(): void {
+		if (!this.fieldsToHide?.length) return;
+
+		for(const field in this.formGroup.controls) {
+			this.fieldsToHide.forEach((fieldToHide: string) => {
+				if (fieldToHide === field) {
+					this.formGroup.removeControl(field);
+				}
+			})
+		}
+	}
+	
+	private buildCustomFields(): Promise<boolean> {
+		if (!this.customFields?.length) return;
+
+		return new Promise(resolve => {
+			this.customFields.forEach((field: any, index: number) => {
+				this.formGroup.addControl(
+					field.name, 
+					new FormControl(null, Validators.required)
+				);
+	
+				if (this.customFields.length - 1 === index) {
+					resolve(true);
+				}
+			});
+		});
+	}
 }

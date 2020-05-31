@@ -5,10 +5,9 @@ import { ListResponse } from '../../../../interfaces';
 import { Help, Customer } from '../../../../models';
 
 @Component({
-	selector: 'admin-smart-table-customer',
+	selector: 'help-crew-smart-table-customer',
 	template: `
 		<app-smart-listing-table
-			[columns]="columns"
 			name="Contratante"
 			[data]="data"
 			(delete)="handleDelete($event)"
@@ -19,14 +18,7 @@ import { Help, Customer } from '../../../../models';
 	`
 })
 
-export class ListCustomerComponent implements OnInit {
-	columns = {
-		value: {
-			title: 'Preço',
-			type: 'string'
-		},
-	};
-
+export class HelpCrewListCustomerComponent implements OnInit {
 	data: Array<any>;
 	deleted: boolean;
 	edited: boolean;

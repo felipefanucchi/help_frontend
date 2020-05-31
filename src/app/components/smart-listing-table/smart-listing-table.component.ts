@@ -8,40 +8,41 @@ import { NbToastrConfig, NbToastrService } from '@nebular/theme';
 
 export class SmartListingTableComponent implements OnInit, OnChanges {
 	@Input() columns: Array<any>;
-	@Input() objectName: string;
+	@Input('name') objectName: string;
 	@Input() data: Array<any>;
 	@Input() deleted: boolean;
 	@Input() edited: boolean;
+	@Input('hide_columns') columnsToHide: [];
 
 	@Output() delete: EventEmitter<any> = new EventEmitter<any>();
 	@Output() edit: EventEmitter<any> = new EventEmitter<any>();
 
-  settings: any;
+	settings: any;
 
-  constructor(private toastrService: NbToastrService) {}
-	
+	constructor(private toastrService: NbToastrService) { }
+
 	ngOnInit(): void {
 		this.buildColumns(this.columns);
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if(changes.deleted?.currentValue) {
+		if (changes.deleted?.currentValue) {
 			this.showToastr(
-                this.objectName + ' deletado(a) com sucesso',
-                'top-right',
-                'warning'
-            );
+				this.objectName + ' deletado(a) com sucesso',
+				'top-right',
+				'warning'
+			);
 		}
-		if(changes.edited?.currentValue) {
+		if (changes.edited?.currentValue) {
 			this.showToastr(
-                this.objectName + ' editado(a) com sucesso',
-                'top-right',
-                'success'
-            );
+				this.objectName + ' editado(a) com sucesso',
+				'top-right',
+				'success'
+			);
 		}
 	}
-	
-  async onDeleteConfirm(event) {
+
+	async onDeleteConfirm(event) {
 		const response = await this.handleDeleteEvent(event);
 		if (!response) return
 
@@ -58,11 +59,11 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 	private async handleDeleteEvent(event) {
 		return new Promise(async (resolve, reject) => {
 			if (
-                event?.confirm 
-                && window.confirm(
-                    `Deseja deletar o(a) ${this.objectName.toLowerCase()} atual?`
-                )
-            ) {
+				event?.confirm
+				&& window.confirm(
+					`Deseja deletar o(a) ${this.objectName.toLowerCase()} atual?`
+				)
+			) {
 				await event.confirm.resolve();
 				resolve(true);
 			} else {
@@ -75,11 +76,11 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 	private async handleEditEvent(event) {
 		return new Promise(async (resolve, reject) => {
 			if (
-                event?.confirm 
-                && window.confirm(
-                    `Deseja editar o(a) ${this.objectName.toLowerCase()} atual?`
-                )
-            ) {
+				event?.confirm
+				&& window.confirm(
+					`Deseja editar o(a) ${this.objectName.toLowerCase()} atual?`
+				)
+			) {
 				await event.confirm.resolve();
 				resolve(true);
 			} else {
@@ -88,15 +89,69 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 			}
 		})
 	}
-	
+
 	private buildColumns(data: Object): void {
-        const columns = {
-            id: {
-                title: 'ID',
-                type: 'number',
-                editable: false,
-            }
-        };
+		let columns = {
+			id: {
+				title: 'ID',
+				type: 'number',
+				editable: false,
+			},
+			name: {
+				title: 'Nome Completo',
+				type: 'string'
+			},
+			email: {
+				title: 'E-mail',
+				type: 'string'
+			},
+			birthdate: {
+				title: 'Nascimento',
+				type: 'string'
+			},
+			document_number: {
+				title: 'CPF',
+				type: 'string'
+			},
+			postal_code: {
+				title: 'CEP',
+				type: 'string'
+			},
+			address: {
+				title: 'Endereço',
+				type: 'string'
+			},
+			address_number: {
+				title: 'Número',
+				type: 'string'
+			},
+			address_complement: {
+				title: 'Complemento',
+				type: 'string'
+			},
+			neighborhood: {
+				title: 'Bairro',
+				type: 'string'
+			},
+			city: {
+				title: 'Cidade',
+				type: 'string'
+			},
+			state: {
+				title: 'Estado',
+				type: 'string'
+			},
+		};
+
+		if (this.columnsToHide?.length) {
+			Object.keys(columns).forEach(key => {
+				this.columnsToHide.forEach(columnToHide => {
+					if (key === columnToHide) {
+						delete columns[key];
+					}
+				})
+			});
+		}
 
 		this.settings = {
 			actions: {

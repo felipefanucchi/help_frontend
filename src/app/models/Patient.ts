@@ -1,12 +1,17 @@
 export class Patient {
-    id?: number;
-    name: string;
+	id?: number;
+	name: string;
 	postal_code: number;
 	address: string;
 	neighborhood: string;
 	city: string;
 	state: string;
+<<<<<<< HEAD
     phones: string;
 	birthday: string;
 	document_number: string;
+=======
+	phones: string;
+	birthday: string;
+>>>>>>> develop
 }
