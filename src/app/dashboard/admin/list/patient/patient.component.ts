@@ -8,57 +8,17 @@ import { Patient } from '../../../../models';
 	selector: 'admin-smart-listing-table-patient',
 	template: `
 		<app-smart-listing-table
-			[columns]="columns"
 			name="Paciente"
 			[data]="data"
-			(delete)="handleDelete($event)"
-			(edit)="handleEdit($event)"
 			[deleted]="deleted"
 			[edited]="edited"
+			(delete)="handleDelete($event)"
+			(edit)="handleEdit($event)"
 		></app-smart-listing-table>
 	`
 })
 
 export class ListPatientComponent implements OnInit {
-	columns = {
-		document_number: {
-			title: 'Documento',
-			type: 'string',
-		},
-		name: {
-			title: 'Nome',
-			type: 'string',
-		},
-		postal_code: {
-			title: 'CEP',
-			type: 'number',
-		},
-		address: {
-			title: 'Endereço',
-			type: 'string',
-		},
-		neighborhood: {
-			title: 'Bairro',
-			type: 'string',
-		},
-		city: {
-			title: 'Cidade',
-			type: 'string',
-		},
-		state: {
-			title: 'Estado',
-			type: 'string',
-		},
-		phones: {
-			title: 'Telefone(s)',
-			type: 'string',
-		},
-		birthday: {
-			title: 'Nascimento',
-			type: 'string',
-		}
-	};
-
 	data: Array<any>;
 	deleted: boolean;
 	edited: boolean;

@@ -8,13 +8,13 @@ import { Professional } from '../../../../models';
 	selector: 'admin-smart-table-professional',
 	template: `
 		<app-smart-listing-table
-			[columns]="columns"
 			name="Profissional"
+			[columns]="columns"
 			[data]="data"
-			(delete)="handleDelete($event)"
-			(edit)="handleEdit($event)"
 			[deleted]="deleted"
 			[edited]="edited"
+			(delete)="handleDelete($event)"
+			(edit)="handleEdit($event)"
 		></app-smart-listing-table>
 	`
 })
@@ -32,7 +32,11 @@ export class ListProfessionalComponent implements OnInit {
 		service: {
 			title: 'Serviço',
 			type: 'string'
-		}
+		},
+		email: {
+			title: 'E-mail',
+			type: 'string'
+		},
 	};
 
 	data: Array<any>;
