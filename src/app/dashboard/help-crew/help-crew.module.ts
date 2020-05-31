@@ -8,11 +8,13 @@ import { HelpCrewListProfessionalComponent } from './list/professional/professio
 import { HelpCrewListPatientComponent } from './list/patient/patient.component';
 import { HelpCrewAddPatientComponent } from './add/patient/patient.component';
 import { HelpCrewAddCareComponent } from './add/care/care.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
 		HelpCrewRoutingModule,
 		ComponentsModule,
+		CommonModule
   ],
   declarations: [
 		HelpCrewAddProfessionalComponent,
