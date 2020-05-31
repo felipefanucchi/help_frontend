@@ -7,12 +7,12 @@ import { NbToastrService } from '@nebular/theme';
 @Component({
 	selector: 'admin-add-help-crew',
 	template: `
-	<app-create-user 
+	<app-create 
 		[custom_fields]="[]" 
-		role="Membro Equipe Help" 
+		name="Membro Equipe Help" 
 		(event_submitted)="handleSubmit($event)"
 		[finished]="finished"
-	></app-create-user>`
+	></app-create>`
 })
 export class AddHelpCrewComponent {
 	finished: boolean;

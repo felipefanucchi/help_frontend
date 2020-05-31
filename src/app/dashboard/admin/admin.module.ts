@@ -10,6 +10,7 @@ import { ListProfessionalComponent } from './list/professional/professional.comp
 import { ListAdminComponent } from './list/admin/admin.component';
 import { ListHelpCrewComponent } from './list/help-crew/help-crew.component';
 import { ListPatientComponent } from './list/patient/patient.component';
+import { AddPatientComponent } from './add/patient/patient.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,7 @@ import { ListPatientComponent } from './list/patient/patient.component';
 		AddCustomerComponent,
 		AddAdministratorComponent,
 		AddHelpCrewComponent,
+		AddPatientComponent,
 		ListCustomerComponent,
 		ListProfessionalComponent,
 		ListAdminComponent,

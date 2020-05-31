@@ -7,12 +7,12 @@ import { NbToastrService } from '@nebular/theme';
 @Component({
 	selector: 'admin-add-professional',
 	template: `
-	<app-create-user 
+	<app-create 
 		[custom_fields]="fields" 
-		role="Profissional" 
+		name="Profissional" 
 		(event_submitted)="handleSubmit($event)"
 		[finished]="finished"
-	></app-create-user>`
+	></app-create>`
 })
 export class AddProfessionalComponent {
 	fields = [

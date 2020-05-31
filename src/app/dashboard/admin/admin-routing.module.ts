@@ -10,6 +10,7 @@ import { ListCustomerComponent } from './list/customer/customer.component';
 import { ListAdminComponent } from './list/admin/admin.component';
 import { ListHelpCrewComponent } from './list/help-crew/help-crew.component';
 import { ListPatientComponent } from './list/patient/patient.component';
+import { AddPatientComponent } from './add/patient/patient.component';
 
 const routes: Routes = [
 	{
@@ -31,10 +32,10 @@ const routes: Routes = [
 				path: 'equipe-help',
 				component: AddHelpCrewComponent
 			},
-			// {
-			// 	path: 'paciente',
-			// 	component: AddPatientComponent
-			// },
+			{
+				path: 'paciente',
+				component: AddPatientComponent
+			},
 		],
 	},
 	{
