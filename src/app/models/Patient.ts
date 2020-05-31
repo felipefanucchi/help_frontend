@@ -6,12 +6,7 @@ export class Patient {
 	neighborhood: string;
 	city: string;
 	state: string;
-<<<<<<< HEAD
     phones: string;
 	birthday: string;
 	document_number: string;
-=======
-	phones: string;
-	birthday: string;
->>>>>>> develop
 }
