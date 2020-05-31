@@ -13,7 +13,6 @@ import { NbToastrService, NbToastrConfig } from '@nebular/theme';
 			[data]="data"
 			[deleted]="deleted"
 			[edited]="edited"
-			[columns]="columns"
 			(delete)="handleDelete($event)"
 			(edit)="handleEdit($event)"
 		></app-smart-listing-table>
@@ -24,12 +23,6 @@ export class ListAdminComponent implements OnInit {
 	data: Array<any>;
 	deleted: boolean;
 	edited: boolean;
-	columns = {
-		email: {
-			title: 'E-mail',
-			type: 'string'
-		},
-	};
 
 	constructor(
 		private http: HttpClient,

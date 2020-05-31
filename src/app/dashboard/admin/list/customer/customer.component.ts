@@ -25,10 +25,6 @@ export class ListCustomerComponent implements OnInit {
 			title: 'Preço',
 			type: 'string'
 		},
-		email: {
-			title: 'E-mail',
-			type: 'string'
-		},
 	};
 
 	data: Array<any>;

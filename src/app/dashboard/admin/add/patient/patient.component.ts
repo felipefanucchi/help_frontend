@@ -10,7 +10,7 @@ import { NbToastrService } from '@nebular/theme';
 	<app-create 
 		name="Paciente" 
 		[custom_fields]="[]"
-		[hide_fields]="[ 'email' ]"
+		[hide_fields]="[ 'email', 'address_complement', 'address_number' ]"
 		[finished]="finished"
 		(event_submitted)="handleSubmit($event)"
 	></app-create>`
@@ -24,7 +24,7 @@ export class AddPatientComponent {
 	) { }
 
 	handleSubmit(data: Patient) {
-		this.http.post(`${environment.api}/cares/patient/`, data)
+		this.http.post(`${environment.api}/cares/patients/`, data)
 			.subscribe(() => {
 				this.finished = true;
 				this.showFormSentToast('top-right', 'success');

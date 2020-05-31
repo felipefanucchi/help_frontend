@@ -33,10 +33,6 @@ export class ListProfessionalComponent implements OnInit {
 			title: 'Serviço',
 			type: 'string'
 		},
-		email: {
-			title: 'E-mail',
-			type: 'string'
-		},
 	};
 
 	data: Array<any>;

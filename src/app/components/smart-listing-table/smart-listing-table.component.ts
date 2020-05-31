@@ -12,6 +12,7 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 	@Input() data: Array<any>;
 	@Input() deleted: boolean;
 	@Input() edited: boolean;
+	@Input('hide_columns') columnsToHide: [];
 
 	@Output() delete: EventEmitter<any> = new EventEmitter<any>();
 	@Output() edit: EventEmitter<any> = new EventEmitter<any>();
@@ -90,7 +91,7 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 	}
 
 	private buildColumns(data: Object): void {
-		const columns = {
+		let columns = {
 			id: {
 				title: 'ID',
 				type: 'number',
@@ -98,6 +99,10 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 			},
 			name: {
 				title: 'Nome Completo',
+				type: 'string'
+			},
+			email: {
+				title: 'E-mail',
 				type: 'string'
 			},
 			birthdate: {
@@ -137,6 +142,16 @@ export class SmartListingTableComponent implements OnInit, OnChanges {
 				type: 'string'
 			},
 		};
+
+		if (this.columnsToHide?.length) {
+			Object.keys(columns).forEach(key => {
+				this.columnsToHide.forEach(columnToHide => {
+					if (key === columnToHide) {
+						delete columns[key];
+					}
+				})
+			});
+		}
 
 		this.settings = {
 			actions: {

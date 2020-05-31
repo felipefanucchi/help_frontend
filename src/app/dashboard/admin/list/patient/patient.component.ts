@@ -12,6 +12,7 @@ import { Patient } from '../../../../models';
 			[data]="data"
 			[deleted]="deleted"
 			[edited]="edited"
+			[hide_columns]="['email','address_number','address_complement']"
 			(delete)="handleDelete($event)"
 			(edit)="handleEdit($event)"
 		></app-smart-listing-table>
