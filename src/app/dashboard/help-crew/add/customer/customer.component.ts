@@ -1,21 +1,28 @@
 import { Component } from "@angular/core";
-import { Help, Patient } from '../../../../models';
-import { HttpClient } from '@angular/common/http'
+import { Customer } from '../../../../models';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../environments/environment';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
-	selector: 'admin-add-patient',
+	selector: 'help-crew-add-customer',
 	template: `
 	<app-create 
-		name="Paciente" 
-		[custom_fields]="[]"
-		[hide_fields]="[ 'email', 'address_complement', 'address_number' ]"
-		[finished]="finished"
+		[custom_fields]="fields" 
+		name="Contratante" 
 		(event_submitted)="handleSubmit($event)"
+		[finished]="finished"
 	></app-create>`
 })
-export class AddPatientComponent {
+export class HelpCrewAddCustomerComponent {
+	fields = [
+		{
+			type: 'text',
+			label: 'Preço',
+			placeholder: 'R$ 99,90',
+			name: 'cost'
+		}
+	];
 	finished: boolean;
 
 	constructor(
@@ -23,8 +30,8 @@ export class AddPatientComponent {
 		private toastrService: NbToastrService,
 	) { }
 
-	handleSubmit(data: Patient) {
-		this.http.post(`${environment.api}/cares/patients/`, data)
+	handleSubmit(data: Customer): void {
+		this.http.post(`${environment.api}/accounts/customers/`, data)
 			.subscribe(() => {
 				this.finished = true;
 				this.showFormSentToast('top-right', 'success');
@@ -36,7 +43,7 @@ export class AddPatientComponent {
 			position,
 			status
 		};
-
-		this.toastrService.show('Formulário submetido', 'Sucesso', iconConfig);
+		
+    	this.toastrService.show('Formulário submetido', 'Sucesso', iconConfig);
 	}
 }

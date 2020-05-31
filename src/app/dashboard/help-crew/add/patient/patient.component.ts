@@ -5,7 +5,7 @@ import { environment } from '../../../../../environments/environment';
 import { NbToastrService } from '@nebular/theme';
 
 @Component({
-	selector: 'admin-add-patient',
+	selector: 'help-crew-add-patient',
 	template: `
 	<app-create 
 		name="Paciente" 
@@ -15,7 +15,7 @@ import { NbToastrService } from '@nebular/theme';
 		(event_submitted)="handleSubmit($event)"
 	></app-create>`
 })
-export class AddPatientComponent {
+export class HelpCrewAddPatientComponent {
 	finished: boolean;
 
 	constructor(

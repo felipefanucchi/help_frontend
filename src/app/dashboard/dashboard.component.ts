@@ -4,6 +4,7 @@ import { PROFESSIONAL_MENU_ITEMS } from './professional/professional-menu';
 import { AuthenticationService } from '../services';
 import { NbMenuItem } from '@nebular/theme';
 import { User } from '../models/User';
+import { HELP_MENU_ITEMS } from './help-crew/help-crew-menu';
 
 @Component({
   selector: 'ngx-pages',
@@ -32,6 +33,9 @@ export class DashboardComponent implements OnInit {
         break;
       case 'profesional':
         this.menu = PROFESSIONAL_MENU_ITEMS;
+        break;
+      case 'help':
+        this.menu = HELP_MENU_ITEMS;
         break;
       default:
         this.menu = [];
