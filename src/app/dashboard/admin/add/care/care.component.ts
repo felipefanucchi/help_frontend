@@ -46,6 +46,8 @@ export class AddCareComponent implements OnInit {
 				options: professionals
 			}];
 		});
+
+		this.buildCustomFields();
 	}
 
 	handleSubmit(data: Patient) {
@@ -87,5 +89,27 @@ export class AddCareComponent implements OnInit {
 		this.professionalsCount = response.count;
 		this.professionals = response.results;
 		return response.results;
+	}
+
+	buildCustomFields(): void {
+		this.fields = [...this.fields, {
+			type: 'select',
+			label: 'Serviços',
+			name: 'service',
+			options: [
+				{
+					value: 'speech_therapist',
+					label: 'Fonoaudiólogo'
+				},
+				{
+					value: 'phisiotherapy',
+					label: 'Fisioterapeuta'
+				},
+				{
+					value: 'occupational_therapy',
+					label: 'Terapia Ocupacional'
+				},
+			]
+		}];
 	}
 }

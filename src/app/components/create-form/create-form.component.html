@@ -229,11 +229,11 @@
 										}">
 										<nb-option 
 											*ngFor="let option of field?.options" 
-											[value]="option?.id">
-											{{option?.name}}
+											[value]="option?.id || option?.value">
+											{{option?.name || option?.label}}
 										</nb-option>
 										<nb-option *ngIf="!field?.options?.length" disabled>
-											Não há {{field?.name}} disponível
+											Não há {{field?.name || field?.label}} disponível
 										</nb-option>
 									</nb-select>
 								</ng-container>
