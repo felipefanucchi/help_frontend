@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from "@angu
 import { FormBuilder, FormGroup, Validators, AbstractControl, FormControl, FormArray } from '@angular/forms';
 import { NbToastrService } from '@nebular/theme';
 import { resolve } from 'dns';
+import { States } from '../../helpers';
 
 @Component({
 	selector: 'app-create',
@@ -16,10 +17,11 @@ export class CreateFormComponent implements OnInit, OnChanges {
 	@Output('event_submitted') submitted: EventEmitter<any> = new EventEmitter<any>();
 	formGroup: FormGroup;
 	wasSubmitted: boolean
+	states: Array<any>;
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private toastrService: NbToastrService
+		private toastrService: NbToastrService,
 	) {
 		this.formGroup = this.formBuilder.group({
 			name: [null, [Validators.required]],
@@ -32,8 +34,10 @@ export class CreateFormComponent implements OnInit, OnChanges {
 			postal_code: [null, [Validators.required]],
 			neighborhood: [null, [Validators.required]],
 			city: [null, [Validators.required]],
-			state: [null, [Validators.required]]
+			state: ['', [Validators.required]]
 		});
+
+		this.states = States.getList();
 	}
 
 	ngOnInit(): void {

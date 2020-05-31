@@ -180,17 +180,18 @@
 				<div class="col" *ngIf="!fieldsToHide?.includes('state')">
 					<div class="form-group">
 						<label for="state" class="label">Estado</label>
-						<input 
+						<nb-select formControlName="state" id="state"
+							fullWidth
+							[selected]="state"
 							[ngClass]="{ 
 								'status-danger': formGroup.get('state')?.invalid && wasSubmitted 
-							}" 
-							formControlName="state" 
-							type="text" 
-							nbInput 
-							fullWidth 
-							id="state" 
-							placeholder="São Paulo"
-						>
+							}"
+							>
+							<nb-option value="" disabled>Selecione um estado</nb-option>
+							<nb-option *ngFor="let state of states" [value]="state.id">
+							  {{state.name}}
+							</nb-option>
+						</nb-select>
 					</div>
 				</div>
 			</div>
