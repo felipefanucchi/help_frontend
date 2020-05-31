@@ -11,11 +11,15 @@ import { ListAdminComponent } from './list/admin/admin.component';
 import { ListHelpCrewComponent } from './list/help-crew/help-crew.component';
 import { ListPatientComponent } from './list/patient/patient.component';
 import { AddPatientComponent } from './add/patient/patient.component';
+import { AddCareComponent } from './add/care/care.component';
+import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
 		AdminRoutingModule,
 		ComponentsModule,
+		CommonModule
   ],
   declarations: [
 		AddProfessionalComponent,
@@ -23,6 +27,7 @@ import { AddPatientComponent } from './add/patient/patient.component';
 		AddAdministratorComponent,
 		AddHelpCrewComponent,
 		AddPatientComponent,
+		AddCareComponent,
 		ListCustomerComponent,
 		ListProfessionalComponent,
 		ListAdminComponent,

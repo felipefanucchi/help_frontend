@@ -77,4 +77,18 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
         }
       ]
     },
+    {
+      title: 'Tratamentos',
+      icon: 'activity-outline',
+      children: [
+        {
+          title: 'Adicionar novo',
+          link: `${basePath}/adicionar/tratamento`
+        },
+        {
+          title: 'Ver todos',
+          link: `${basePath}/lista/tratamento`
+        }
+      ]
+    },
   ];
