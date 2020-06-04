@@ -22,6 +22,9 @@ import {
 } from '@nebular/theme';
 import { ErrorInterceptor, TokenInterceptor } from './helpers';
 import { AuthenticationModule } from './auth/auth.module';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
 
 @NgModule({
   declarations: [AppComponent],
@@ -42,7 +45,8 @@ import { AuthenticationModule } from './auth/auth.module';
     CoreModule.forRoot(),
 		ThemeModule.forRoot(),
 		AuthenticationModule,
-		NbToastrModule.forRoot(),
+    NbToastrModule.forRoot(),
+    NgxMaskModule.forRoot(options),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },

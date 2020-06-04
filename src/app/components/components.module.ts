@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateFormComponent } from './create-form/create-form.component';
 import { SmartListingTableComponent } from './smart-listing-table/smart-listing-table.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { NgxMaskModule } from 'ngx-mask';
 @NgModule({
 	imports: [
 		ThemeModule,
@@ -19,6 +20,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 		ReactiveFormsModule,
 		NbRadioModule,
 		Ng2SmartTableModule,
+		NgxMaskModule.forChild()
 	],
 	declarations: [
 		CreateFormComponent,
