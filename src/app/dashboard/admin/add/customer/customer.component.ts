@@ -20,7 +20,10 @@ export class AddCustomerComponent {
 			type: 'text',
 			label: 'Preço',
 			placeholder: 'R$ 99,90',
-			name: 'cost'
+			name: 'cost',
+			mask: 'separator.2',
+			thousandSeparator: '.',
+			prefix: 'R$ ',
 		}
 	];
 	finished: boolean;
