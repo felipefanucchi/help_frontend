@@ -3,92 +3,103 @@ import { NbMediaBreakpointsService, NbMenuService, NbSidebarService, NbThemeServ
 
 import { UserData } from '../../../@core/data/users';
 import { LayoutService } from '../../../@core/utils';
-import { map, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { map, takeUntil, filter } from 'rxjs/operators';
+import { Subject, Observable } from 'rxjs';
+import { AuthenticationService } from '../../../services';
+import { Role, Professional, Customer, Help, Admin } from '../../../models';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
+import { HandleUserType } from '../../../helpers';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'ngx-header',
-  styleUrls: ['./header.component.scss'],
-  templateUrl: './header.component.html',
+	selector: 'ngx-header',
+	styleUrls: ['./header.component.scss'],
+	templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit, OnDestroy {
 
-  private destroy$: Subject<void> = new Subject<void>();
-  userPictureOnly: boolean = false;
-  user: any;
+	private destroy$: Subject<void> = new Subject<void>();
+	userPictureOnly: boolean = false;
+	user: any;
 
-  themes = [
-    {
-      value: 'default',
-      name: 'Light',
-    },
-    {
-      value: 'dark',
-      name: 'Dark',
-    },
-    {
-      value: 'cosmic',
-      name: 'Cosmic',
-    },
-    {
-      value: 'corporate',
-      name: 'Corporate',
-    },
-  ];
+	currentTheme = 'default';
 
-  currentTheme = 'default';
+	userMenu = [{ title: 'Meu Perfil' }, { title: 'Sair', action: () => this.logout() }];
 
-  userMenu = [ { title: 'Profile' }, { title: 'Log out' } ];
+	constructor(
+		private sidebarService: NbSidebarService,
+		private menuService: NbMenuService,
+		private themeService: NbThemeService,
+		private layoutService: LayoutService,
+		private authenticationService: AuthenticationService,
+		private router: Router,
+		private http: HttpClient
+	) { }
 
-  constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private themeService: NbThemeService,
-              private userService: UserData,
-              private layoutService: LayoutService,
-              private breakpointService: NbMediaBreakpointsService) {
-  }
+	ngOnInit() {
+		this.setCurrentUser();
 
-  ngOnInit() {
-    this.currentTheme = this.themeService.currentTheme;
+		this.menuService.onItemClick()
+			.subscribe(item => item['action']());
+	}
 
-    this.userService.getUsers()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((users: any) => this.user = users.nick);
+	ngOnDestroy() {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
 
-    const { xl } = this.breakpointService.getBreakpointsMap();
-    this.themeService.onMediaQueryChange()
-      .pipe(
-        map(([, currentBreakpoint]) => currentBreakpoint.width < xl),
-        takeUntil(this.destroy$),
-      )
-      .subscribe((isLessThanXl: boolean) => this.userPictureOnly = isLessThanXl);
+	changeTheme(themeName: string) {
+		this.themeService.changeTheme(themeName);
+	}
 
-    this.themeService.onThemeChange()
-      .pipe(
-        map(({ name }) => name),
-        takeUntil(this.destroy$),
-      )
-      .subscribe(themeName => this.currentTheme = themeName);
-  }
+	toggleSidebar(): boolean {
+		this.sidebarService.toggle(true, 'menu-sidebar');
+		this.layoutService.changeLayoutSize();
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+		return false;
+	}
 
-  changeTheme(themeName: string) {
-    this.themeService.changeTheme(themeName);
-  }
+	navigateHome() {
+		this.menuService.navigateHome();
+		return false;
+	}
 
-  toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
-    this.layoutService.changeLayoutSize();
+	setCurrentUser(): void {
+		let currentUser;
+		const {
+			role,
+			email
+		} = this.authenticationService.currentUserValue;
+		console.log(this.authenticationService.currentUserValue);
+		let endpoint: string;
 
-    return false;
-  }
+		switch (role) {
+			case 'admin':
+				endpoint = 'admin';
+				break;
+			case 'profesional':
+				endpoint = 'profesionals';
+				break;
+			case 'help':
+				endpoint = 'help'
+			case 'customer':
+				endpoint = 'customers';
+				break;
+		}
 
-  navigateHome() {
-    this.menuService.navigateHome();
-    return false;
-  }
+		this.getCurrentUser(endpoint, email)
+			.subscribe(user => this.user = user);
+	}
+
+	getCurrentUser(endpoint: string, email: string): Observable<any> {
+		return this.http.get(`${environment.api}/accounts/${endpoint}/`, {
+			params: { email }
+		});
+	}
+
+	logout(): void {
+		this.authenticationService.logout();
+		this.router.navigate(['/']);
+	}
 }
