@@ -4,7 +4,6 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs/operators';
 import { User } from '../models/User';
-import { HandleUserType } from '../helpers';
 // @ts-ignore: Unreachable code error
 import * as FakeUser from '../fakeuser.json';
 
@@ -28,8 +27,6 @@ export class AuthenticationService {
 	}
 
 	login(email: string, password: string): Observable<any> {
-		// const HandleUser = new HandleUserType(FakeUser.default.user);
-		// const currentUser = HandleUser.create();
 		return this.http.post(`${environment.api}/accounts/login/`, {
 			email,
 			password
