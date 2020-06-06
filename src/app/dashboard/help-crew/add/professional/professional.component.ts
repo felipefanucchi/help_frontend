@@ -57,6 +57,11 @@ export class HelpCrewAddProfessionalComponent {
 
 	handleSubmit(data: Professional): void {
 		console.log(data, ' This data goes to API.');
+
+		// Mocking coordinates just for test ends.
+		Object.assign(data, {
+			coordinates: [null, null]
+		});
 		
 		this.http.post(`${environment.api}/accounts/profesionals/`, data)
 			.subscribe(() => {

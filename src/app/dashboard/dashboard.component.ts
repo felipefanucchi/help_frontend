@@ -5,6 +5,7 @@ import { AuthenticationService } from '../services';
 import { NbMenuItem } from '@nebular/theme';
 import { User } from '../models/User';
 import { HELP_MENU_ITEMS } from './help-crew/help-crew-menu';
+import { CUSTOMER_MENU_ITEMS } from './customer/customer-menu';
 
 @Component({
   selector: 'ngx-pages',
@@ -36,6 +37,9 @@ export class DashboardComponent implements OnInit {
         break;
       case 'help':
         this.menu = HELP_MENU_ITEMS;
+        break;
+      case 'customer':
+        this.menu = CUSTOMER_MENU_ITEMS;
         break;
       default:
         this.menu = [];

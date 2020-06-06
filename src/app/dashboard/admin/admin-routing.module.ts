@@ -11,6 +11,7 @@ import { ListAdminComponent } from './list/admin/admin.component';
 import { ListHelpCrewComponent } from './list/help-crew/help-crew.component';
 import { ListPatientComponent } from './list/patient/patient.component';
 import { AddPatientComponent } from './add/patient/patient.component';
+import { AddCareComponent } from './add/care/care.component';
 
 const routes: Routes = [
 	{
@@ -35,6 +36,10 @@ const routes: Routes = [
 			{
 				path: 'paciente',
 				component: AddPatientComponent
+			},
+			{
+				path: 'tratamento',
+				component: AddCareComponent
 			},
 		],
 	},

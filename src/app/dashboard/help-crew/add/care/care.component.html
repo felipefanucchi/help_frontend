@@ -1,0 +1,9 @@
+<app-create
+	*ngIf="professionals.length || customers.length"
+	name="Tratamento"
+	first_header_title="Dados do paciente"
+	[custom_fields]="fields"
+	[hide_fields]="[ 'email', 'address_complement', 'address_number' ]"
+	[finished]="finished"
+	(event_submitted)="handleSubmit($event)"
+></app-create>
