@@ -26,12 +26,45 @@ export class CustomerAddCareComponent implements OnInit {
 	ngOnInit(): void {
 		this.getCustomers().subscribe((customers: Customer[]) => {
 			this.customers = customers;
-			this.fields = [...this.fields, {
-				type: 'select',
-				label: 'Selecione um contratante',
-				name: 'customer',
-				options: customers
-			}];
+			this.fields = [...this.fields, 
+				{
+					type: 'select',
+					label: 'Selecione um contratante',
+					name: 'customer',
+					options: customers
+				},
+				{
+					type: 'text',
+					label: 'Qual a frequência em dias?',
+					placeholder: '3 dias',
+				},
+				{
+					type: 'select',
+					label: 'Qual o intervalo dos atendimentos?',
+					options: [
+						{
+							label: 'Semanal',
+							value: 'week'
+						},
+						{
+							label: 'Diário',
+							value: 'daily'
+						},
+						{
+							label: 'Mensal',
+							value: 'monthly'
+						},
+						{
+							label: 'Trimestral',
+							value: 'quarter'
+						},
+						{
+							label: 'Semestral',
+							value: 'semester'
+						},
+					]
+				},
+			];
 		});
 
 		this.buildCustomFields();
